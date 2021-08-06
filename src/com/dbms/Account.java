@@ -1,56 +1,84 @@
 package com.dbms;
-//import for the datetime variables
-import java.util.LocalDate;
-
+//import for the LocalDate variables
+import java.time.LocalDate;
 
 public class Account {
-  private String Borrowed_Items;
-  private int Borrowed_Qty;
-  private datetime Date_Borrowed;
-  private int Returned_Qty;
-  private datetime Returned_Date;
+  private String borrowedItems;
+  private int borrowedQty;
+  private LocalDate dateBorrowed;
+  private int returnedQty;
+  private LocalDate returnedDate;
 
 //Account with no variables
-  public display(){
-    this.Borrowed_Items = "Unknown";
-    this.Borrowed_Qty = 0
-    this.Date_Borrowed = "Unknown"
-    this.Returned_Qty = 0
-    this.Returned_Date = "Unknown"
-  }
+ public Account() {
+        this.borrowedItems = "Unknown";
+        this.borrowedQty = 0;
+        this.dateBorrowed = null;
+        this.returnedQty = 0;
+        this.returnedDate = null;
+    }
+
+//Account with provided info
+    public Account(String borrowedItems, int borrowedQty, LocalDate dateBorrowed, int returnedQty, LocalDate returnedDate) {
+        this.borrowedItems = borrowedItems;
+        this.borrowedQty = borrowedQty;
+        this.dateBorrowed = dateBorrowed;
+        this.returnedQty = returnedQty;
+        this.returnedDate = returnedDate;
+    }
 
 
-
-
-public String getBorrowed_Items(){
-  return Borrowed_Items;
+//Borrowed Items Getter-Setter
+//Getter
+public String getBorrowedItems(){
+  return borrowedItems;
+}
+//Setter
+public void setBorrowedItems(String borrowedItems){
+  this.borrowedItems = borrowedItems;
 }
 
-public void setBorrowed_Items(String Borrowed_Items){
-  this.Borrowed_Items = Borrowed_Items;
+//Borrowed Quantity Getter-Setter
+//Getter
+public int getBorrowedQty(){
+  return borrowedQty;
 }
 
-public int getBorrowed_Qty(){
-  return Borrowed_Qty;
+//Setter
+public void setBorrowedQty(int borrowedQty){
+  this.borrowedQty = borrowedQty;
 }
 
-public void setBorrowed_Qty(int Borrowed_Qty){
-  this.Borrowed_Qty = Borrowed_Qty;
+// Returned Quantity Getter-Setter
+// Getter
+public int getReturnedQty(){
+  return returnedQty;
 }
 
-public int getReturned_Qty(){
-  return Returned_Qty;
+// Setter
+public void setReturnedQty(int returnedQty){
+  this.returnedQty = returnedQty;
 }
 
-public void setReturned_Qty(int Returned_Qty){
-  this.Returned_Qty = Returned_Qty;
+//Date Borrowed Getter-Setter
+// Getter
+public LocalDate getdateBorrowed() {
+    return dateBorrowed;
 }
 
-public getDate_Borrowed(){
-  LocalDate now = LocalDate.now();
+// Setter
+public void setdateBorrowed(LocalDate dateBorrowed) {
+    this.dateBorrowed = dateBorrowed;
 }
 
-public getDate_Returned(){
-  LocalDate now = LocalDate.now();
+// Returned Date Getter-Setter
+// Getter
+public LocalDate getreturnedDate() {
+    return returnedDate;
+}
+
+// Setter
+public void setreturnDate(LocalDate returnedDate) {
+    this.returnedDate = returnedDate;
 }
 }
