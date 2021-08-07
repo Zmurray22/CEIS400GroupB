@@ -20,7 +20,7 @@ public class EquipmentManager {
 
 // This will grab the Employee Information
     public EquipmentManager(String fName, String lName, int id, String passwordVerified) {
-        this.fName = fName;
+       this.fName = fName;
        this.lName = lName;
        this.id =id;
        this.passwordVerified = passwordVerified;
