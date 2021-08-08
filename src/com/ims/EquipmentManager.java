@@ -7,15 +7,11 @@ import java.util.Objects;
 
 public class EquipmentManager {
 
-
-    public static void main(String[] args) {
-
-    }
     private String fName;
     private String lName;
     private String passwordVerified;
     private int id;
-    private int verifyEquipmentsManager;
+    private int verifyEquipmentManager;
     private int searchDataBase;
 
 // This will grab the Employee Information
@@ -27,23 +23,14 @@ public class EquipmentManager {
         System.out.println("Employee is verified");
     }
 
-    public String getfName() {
-        return fName;
+    public String getfName() { return fName; }
 
-    }
-
-    public void setlName(String fName) {
-        this.lName = fName;
-    }
-
-    public String getlName() {
-        return lName;
-    }
-
-    public void setfName(String lName) {
-        this.lName = lName;
-    }
-
+    public void setfName(String lName) { this.lName = lName; }
+    
+    public String getlName() { return lName; }
+    
+    public void setlName(String fName) { this.lName = fName; }
+    
     public int getId() {
         return id;
     }
@@ -60,20 +47,20 @@ public class EquipmentManager {
         this.passwordVerified = passwordVerifed;
     }
 
-    public int getVerifyEquipmentsManager() {
-        return verifyEquipmentsManager;
+    public int getverifyEquipmentManager() {
+        return verifyEquipmentManager;
     }
 
-    public void setSearchDataBase(int searchDataBase) {
-        this.searchDataBase = searchDataBase;
+    public void setverifyEquipmentManager(int verifyEquipmentManager) {
+        this.verifyEquipmentManager = verifyEquipmentManager;
     }
 
     public int getSearchDataBase() {
         return searchDataBase;
     }
 
-    public void setVerifyEquipmentsManager(int verifyEquipmentsManager) {
-        this.verifyEquipmentsManager = verifyEquipmentsManager;
+    public void setSearchDataBase(int searchDataBase) {
+        this.searchDataBase = searchDataBase;
     }
 
     @Override
@@ -83,7 +70,7 @@ public class EquipmentManager {
                 ", lName='" + lName + '\'' +
                 ", password='" + passwordVerified + '\'' +
                 ", id=" + id +
-                ", verifyEquipmentsManager=" + verifyEquipmentsManager +
+                ", verifyEquipmentManager=" + verifyEquipmentManager +
                 ", searchDataBase=" + searchDataBase +
                 '}';
     }
