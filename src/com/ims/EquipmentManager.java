@@ -11,8 +11,8 @@ public class EquipmentManager {
     private String lName;
     private String passwordVerified;
     private int id;
-    private int verifyEquipmentManager;
-    private int searchDataBase;
+    private int verifyEquipManager;
+    private int searchDatabase;
 
 // This will grab the Employee Information
     public EquipmentManager(String fName, String lName, int id, String passwordVerified) {
@@ -25,42 +25,32 @@ public class EquipmentManager {
 
     public String getfName() { return fName; }
 
-    public void setfName(String lName) { this.lName = lName; }
+    public void setfName(String fName) { this.fName = fName; }
     
     public String getlName() { return lName; }
     
-    public void setlName(String fName) { this.lName = fName; }
+    public void setlName(String lName) { this.lName = fName; }
     
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+    public void setId(int id) { this.id = id; }
 
-    public String getPasswordVerifed() {
-        return passwordVerified;
-    }
+    public String getPasswordVerifed() { return passwordVerified; }
 
     public void setPassword(String passwordVerifed) {
         this.passwordVerified = passwordVerifed;
     }
 
-    public int getverifyEquipmentManager() {
-        return verifyEquipmentManager;
+    public int getVerifyEquipMngr() { return verifyEquipManager; }
+
+    public void setVerifyEquipMngr(int verifyEquipManager) {
+        this.verifyEquipManager = verifyEquipManager;
     }
 
-    public void setverifyEquipmentManager(int verifyEquipmentManager) {
-        this.verifyEquipmentManager = verifyEquipmentManager;
-    }
+    public int getSearchDatabase() { return searchDatabase; }
 
-    public int getSearchDataBase() {
-        return searchDataBase;
-    }
-
-    public void setSearchDataBase(int searchDataBase) {
-        this.searchDataBase = searchDataBase;
+    public void setSearchDatabase(int searchDatabase) {
+        this.searchDatabase = searchDatabase;
     }
 
     @Override
@@ -70,8 +60,8 @@ public class EquipmentManager {
                 ", lName='" + lName + '\'' +
                 ", password='" + passwordVerified + '\'' +
                 ", id=" + id +
-                ", verifyEquipmentManager=" + verifyEquipmentManager +
-                ", searchDataBase=" + searchDataBase +
+                ", verifyEquipManager=" + verifyEquipManager +
+                ", searchDatabase=" + searchDatabase +
                 '}';
     }
 }
