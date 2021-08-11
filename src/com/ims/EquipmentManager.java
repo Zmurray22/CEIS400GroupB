@@ -62,6 +62,6 @@ public class EquipmentManager {
                 ", id=" + id +
                 ", verifyEquipManager=" + verifyEquipManager +
                 ", searchDatabase=" + searchDatabase +
-                '}';
+                '}'; 
     }
 }
