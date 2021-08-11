@@ -6,6 +6,9 @@ import org.w3c.dom.ls.LSOutput;
 import java.util.Objects;
 
 public class EquipmentManager {
+    public static void main(String[] args) {
+
+    }
 
     private String fName;
     private String lName;
