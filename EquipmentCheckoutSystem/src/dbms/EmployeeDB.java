@@ -7,21 +7,11 @@ public class EmployeeDB {
     public EmployeeDB() {
     }
 
-    public void addEmployee() {
+    public static Boolean authenticate(String user, String pswd){
+        Boolean login = false;
+        
+        return login;
     }
-
-    public void add() {
-
-    }
-
-    public void delete() {
-
-    }
-
-    public void search() {
-
-    }
-
     public void updateProfile() {
     //Sends changes in profile records to Employee table
         // Example use DBConnect.SqlUpdate("employee", "fname = 'Jon'", "emlp_id = '0002'");

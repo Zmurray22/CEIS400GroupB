@@ -79,15 +79,29 @@ public class main {
         }
     }
 
-    public static void logIn(){
+    public static byte logIn(){
         Scanner selection = new Scanner(System.in);
         System.out.println("Username:");
         String name = selection.nextLine();
         
         System.out.println("Password:");
         String pswd = selection.nextLine();
+        Boolean log = dbms.EmployeeDB.authenticate(name, pswd);
+        //Use EmplyeeDB to check credentials and if true forward to normal user menu
         
-        
+        if (log == true){
+            System.out.println("1 - View Profile");
+            System.out.println("2 - View Account");// Temporarily Optional for testing purposes
+            System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
+            System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
+            System.out.println("0 - Exit");
+            byte answer = selection.nextByte();
+            return answer;
+        }
+        else{
+            System.out.println("Incorrect credentials!");
+            return 5;
+        }
     }
     
     public static void checkOut(){
