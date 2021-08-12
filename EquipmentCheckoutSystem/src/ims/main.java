@@ -76,4 +76,15 @@ public class main {
         }
     }
 
+    public static void logIn(){
+        
+    }
+    
+    public static void checkOut(){
+        
+    }
+    
+    public static void checkIn(){
+        
+    }
 }
