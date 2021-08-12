@@ -9,6 +9,7 @@ public class EmployeeDB {
 
     public static Boolean authenticate(String user, String pswd){
         Boolean login = false;
+        //request given parameters from DB and confirm true false credentials
         
         return login;
     }
