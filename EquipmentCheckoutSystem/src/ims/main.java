@@ -19,12 +19,15 @@ public class main {
                 break;
             case 2:
                 System.out.println("Log In Menu\n\n");
+                logIn();
                 break;
             case 3:
-                System.out.println("Check in Equipment\n\n");
+                System.out.println("Check Out Equipment\n\n");
+                checkOut();
                 break;
             case 4:
-                System.out.println("Check Out Equipment\n\n");
+                System.out.println("Check In Equipment\n\n");
+                checkIn();
                 break;
             case 0:
                 //Close app
@@ -77,6 +80,13 @@ public class main {
     }
 
     public static void logIn(){
+        Scanner selection = new Scanner(System.in);
+        System.out.println("Username:");
+        String name = selection.nextLine();
+        
+        System.out.println("Password:");
+        String pswd = selection.nextLine();
+        
         
     }
     
