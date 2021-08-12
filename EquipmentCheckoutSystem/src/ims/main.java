@@ -1,9 +1,56 @@
 package ims;
 
 import dbms.DBConnect;
+import java.util.Scanner;
 
-public class main {
+public class main { 
     public static void main(String[] args) {
+        //DBConnect db = new DBConnect();
+        byte choice;
+        do{
+            //Testing console UI
+            System.out.println("Equipment Checkout System");
+            System.out.println("*".repeat(25) );
+
+            choice = mainMenu();
+            switch (choice) {
+            case 1:
+                testDatabase();
+                break;
+            case 2:
+                System.out.println("Log In Menu\n\n");
+                break;
+            case 3:
+                System.out.println("Check in Equipment\n\n");
+                break;
+            case 4:
+                System.out.println("Check Out Equipment\n\n");
+                break;
+            case 0:
+                //Close app
+                System.out.println("Thanks for using\n\n");
+                break;
+            default:
+                // The user input an unexpected choice.
+                System.out.println("Invalid reponse, Try again.\n\n");
+            }    
+        }while(choice != 0);
+    }
+                  
+    public static byte mainMenu() {
+        //Main menu method
+      Scanner selection = new Scanner(System.in);  // Create a Scanner object
+      
+      System.out.println("1 - Test Connection");
+      System.out.println("2 - Log In");// Temporarily Optional for testing purposes
+      System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
+      System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
+      System.out.println("0 - Close app");
+      byte answer = selection.nextByte();
+      return answer;    
+  }
+    
+    public static void testDatabase(){
         DBConnect db = new DBConnect();
         
         if (db.DBReadyForUse()) 
@@ -28,4 +75,5 @@ public class main {
                 System.out.println("This method failed");
         }
     }
+
 }
