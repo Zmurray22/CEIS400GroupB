@@ -1,7 +1,9 @@
 package ims;
 
+import System_Forms.Login_Form;
 import dbms.DBConnect;
 import java.util.Scanner;
+import javax.swing.JFrame;
 
 public class main { 
     public static void main(String[] args) {
@@ -29,6 +31,8 @@ public class main {
                 System.out.println("Check In Equipment\n\n");
                 checkIn();
                 break;
+            case 5:
+                launchGUI();
             case 0:
                 //Close app
                 System.out.println("Thanks for using\n\n");
@@ -48,6 +52,7 @@ public class main {
       System.out.println("2 - Log In");// Temporarily Optional for testing purposes
       System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
       System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
+      System.out.println("5 - Launch GUI Application");
       System.out.println("0 - Close app");
       byte answer = selection.nextByte();
       return answer;    
@@ -77,6 +82,12 @@ public class main {
             else
                 System.out.println("This method failed");
         }
+    }
+    public static void launchGUI()
+    {
+        Login_Form form = new Login_Form();
+        form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        form.setVisible(true);
     }
 
     public static byte logIn(){
