@@ -14,7 +14,7 @@ public class EmployeeDB {
         DBConnect db = new DBConnect();
         Boolean login = false;
         //request given parameters from DB and confirm true false credentials
-        if (db.SqlSelectSingle("SELECT username WHERE username = '" + username + "' AND password = '" + password + "'").equals("")){
+        if (!db.SqlSelectSingle("SELECT username WHERE username = '" + username + "' AND password = '" + password + "'").equals("")){
             System.out.println("Login correct");
         }
         else{
