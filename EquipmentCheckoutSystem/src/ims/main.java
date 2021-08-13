@@ -2,6 +2,7 @@ package ims;
 
 import System_Forms.Login_Form;
 import dbms.DBConnect;
+import dbms.InventoryDB;
 import java.util.Scanner;
 import javax.swing.JFrame;
 
@@ -116,7 +117,10 @@ public class main {
     }
     
     public static void checkOut(){
-        
+        Scanner selection = new Scanner(System.in);
+        System.out.println("What is the equipment ID of the Equipment you need:");
+        String EquipID = selection.nextLine();
+        System.out.println(InventoryDB.search(EquipID));        
     }
     
     public static void checkIn(){
