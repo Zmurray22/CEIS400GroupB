@@ -5,7 +5,7 @@ import dbms.DBConnect;
 import dbms.InventoryDB;
 import java.util.Scanner;
 import javax.swing.JFrame;
-//testing for push and pull from github desktop
+
 public class main { 
     public static void main(String[] args) {
         //DBConnect db = new DBConnect();
