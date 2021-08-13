@@ -93,7 +93,7 @@ public class DBConnect
             // Update the table based on the values provided
             Statement SqlStmt = Conn.createStatement();
             SqlStmt.executeUpdate("UPDATE " + table + " SET " + Clean(set) + " WHERE " + Clean(where));
-            System.out.println("Update compeleted successfully!");
+            System.out.println("Update completed successfully!");
         }
         catch (Exception err) {
             err.printStackTrace();

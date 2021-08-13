@@ -10,10 +10,18 @@ public class EmployeeDB {
     public EmployeeDB() {
     }
 
-    public static Boolean authenticate(String user, String pswd){
+    public static Boolean authenticate(String username, String password){
+        DBConnect db = new DBConnect();
         Boolean login = false;
         //request given parameters from DB and confirm true false credentials
+        if (db.SqlSelectAll("SELECT * WHERE username = '" + username + "' AND password = '" + password + "'")){
+            System.out.println("Login correct");
+        }
+        else{
+            System.out.println("Error logging in");
+        }
         
+        db.Dispose();
         return login;
     }
     public static void add(String fname, String lname, String access, String phone, String username, String password) {
@@ -73,40 +81,42 @@ public class EmployeeDB {
         {
             // Then create the database connection and insert the new vendor
             DBConnect db = new DBConnect();
-            db.SqlInsert("employee", "empl_id, fname, lname, access, phone, username, password", "'" + GetNewID() + "', '" + fname + "', '" + lname + "', '" + access + "', '" + phone + "', '" + username + "', '" + password + "'");
+            db.SqlInsert("employee", "empl_id, fname, lname, access, phone, username, password", "'" + GetNewID() + 
+                    "', '" + fname + "', '" + lname + "', '" + access + "', '" + phone + "', '" + username + "', '" + password + "'");
             db.Dispose(); // Remember to run this to ensure that the database connection is closed
             System.out.println("User " + fname + " " + lname + " added successfully!");
         }
         else
             System.out.println("The user could not be added for the following reason(s):\n" + errors);
     }
-    public static void delete(String vendorID) {
+    public static void delete(String empl_id) {
         DBConnect db = new DBConnect();
-        db.SqlDelete("vendor", "vendor_id = '" + vendorID + "'");
+        db.SqlDelete("employee", "empl_id = '" + empl_id + "'");
         db.Dispose();
-        System.out.println("Vendor removed successfully!");
+        System.out.println("User removed successfully!");
     }
-    public static void update(String vendorID, String newTitle, String newPhone) {
+    public static void update(String empl_id, String newFname, String newLname, String newAccess, String newPhone, String newUsername, String newPassword) {
         DBConnect db = new DBConnect();
-        db.SqlUpdate("vendor", "title = '" + newTitle + "', phone = '" + newPhone + "'", newPhone);
+        db.SqlUpdate("employee", "fname = '" + newFname + "', lname = '" + newLname + "', access = '" + newAccess + "', phone = '" + 
+                newPhone + "', username = '" + newUsername + "', password = '" + newPassword + "'", empl_id);
         db.Dispose();
-        System.out.println("Vendor updated successfully!");
+        System.out.println("User profile updated successfully!");
     }
     public static ResultSet search(String filter) {
         DBConnect db = new DBConnect();
-        ResultSet rs = db.SqlSelectAll("SELECT * FROM vendor WHERE vendor_id LIKE '%" + filter + "%' OR title LIKE '%" + filter + "%' OR phone LIKE '%" + filter + "%'");
+        ResultSet rs = db.SqlSelectAll("SELECT * FROM employee WHERE empl_id LIKE '%" + filter + "%' OR lname LIKE '%" + filter + "%' OR username LIKE '%" + filter + "%'");
         db.Dispose();
         return rs;
     }
     
-    // This method will auto increment the current vendor ID
+    // This method will auto increment the current employee ID
     private static String GetNewID() {
         DBConnect db = new DBConnect(); // Create a database connection
-        String id = db.SqlSelectSingle("SELECT vendor_id FROM vendor ORDER BY vendor_id DESC LIMIT 1"); // First try to get the top ID.
+        String id = db.SqlSelectSingle("SELECT empl_id FROM employee ORDER BY employee_id DESC LIMIT 1"); // First try to get the top ID.
         if (id.equals("")) // This is incase there are no registered vendors in the software
-            id = "001";
+            id = "0001";
         else
-            id = String.format("%03d", Integer.parseInt(id) + 1); // This will increment the top ID by one then format it to have three digits        
+            id = String.format("%04d", Integer.parseInt(id) + 1); // This will increment the top ID by one then format it to have three digits        
         db.Dispose(); // This will close our database connection for us
         return id;
     }
