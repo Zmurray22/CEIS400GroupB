@@ -6,6 +6,8 @@ import dbms.InventoryDB;
 import java.util.Scanner;
 import javax.swing.JFrame;
 //testing for push and pull from github desktop
+
+//test for Zach
 public class main { 
     public static void main(String[] args) {
         //DBConnect db = new DBConnect();
@@ -124,6 +126,12 @@ public class main {
     }
     
     public static void checkIn(){
-        
+        DBConnect db = new DBConnect();
+        Scanner selection = new Scanner(System.in);
+        System.out.println("Please enter the followed, pressing enter after each entry. Equipment ID, Equipment Name, Amount you are returning.");
+        String EquipID = selection.nextLine();
+        String EquipName = selection.nextLine();
+        int Amount = selection.nextInt();
+        System.out.println("This is the following that you entered: " + EquipID + " " + EquipName+ " " + Amount);
     }
 }
