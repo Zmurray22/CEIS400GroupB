@@ -66,10 +66,10 @@ public class EquipmentManager {
     }
     public void verifyEqupiManager(){
     }
-    private void searchDataBase(){
+   /* private void searchDataBase(){
         System.out.println("Your order is on the way.");
         
         
         EmployeeDB.search(fName, lName, id, passwordVerified);
-    }
+    }*/
 }

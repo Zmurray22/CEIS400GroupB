@@ -12,7 +12,7 @@ public class InventoryDB {
     }
 
     
-    public static void add (String title, int available, int total)
+    public static void add (String equipID, String title, int available, int total)
     {
         String errors = "";
         boolean valid = true;
