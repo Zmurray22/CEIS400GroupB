@@ -38,6 +38,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         {
         model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
         }
+        rs.close();
         }catch(Exception ex)
         {
             JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
@@ -83,7 +84,6 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
         btnInventorySearch = new javax.swing.JButton();
-        btnViewTable = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         EquipTable = new javax.swing.JTable();
 
@@ -148,13 +148,6 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             }
         });
 
-        btnViewTable.setText("View");
-        btnViewTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnViewTableActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -184,13 +177,8 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
                                 .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 38, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(80, 80, 80)
-                                .addComponent(btnInventorySearch))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(btnViewTable)))
+                        .addGap(80, 80, 80)
+                        .addComponent(btnInventorySearch)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -220,9 +208,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
-                .addComponent(btnViewTable)
-                .addGap(42, 42, 42)
+                .addGap(96, 96, 96)
                 .addComponent(btnInventorySearch)
                 .addGap(0, 148, Short.MAX_VALUE))
         );
@@ -287,14 +273,16 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         //Display the information in the chart, based on the Equip ID that was given
         //Connect to the DB
         DBConnect db = new DBConnect();
-        
         //Use the search function implemented in the InventoryDB file
         try{
-        ResultSet rs = InventoryDB.search(EquipmentID);
+        ResultSet rs = InventoryDB.Search(EquipmentID, db);
         DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
-        
-        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
-        rs.close(); //Closing the Result Set
+        model.setRowCount(0);
+        while(rs.next())
+        {
+        model.addRow(new String[]{rs.getString("title"), rs.getString("available"), rs.getString("total"), rs.getString("vendor_id"), rs.getString("vendor_id")});
+        }
+        rs.close();
         }catch(Exception ex)
         {
             JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
@@ -302,27 +290,6 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         db.Dispose(); //Closing the connection to the Database
         
     }//GEN-LAST:event_btnInventorySearchActionPerformed
-
-    //***This isn't necessary. Experimental and should be deleted if I forget about it -- Nate
-    private void btnViewTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewTableActionPerformed
-        // TODO add your handling code here:
-        DBConnect db = new DBConnect();
-        String sql = ("SELECT * FROM Inventory");
-        try{
-        ResultSet rs = db.SqlSelectAll(sql);
-        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
-        
-        rs.close(); //Closing the Result Set
-        while (rs.next())
-        {
-        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
-        }
-        }catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
-        }
-        db.Dispose(); //Closing the result to the Database
-    }//GEN-LAST:event_btnViewTableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -362,7 +329,6 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable EquipTable;
     private javax.swing.JButton btnInventorySearch;
-    private javax.swing.JButton btnViewTable;
     private javax.swing.JTextField equipTitletxt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

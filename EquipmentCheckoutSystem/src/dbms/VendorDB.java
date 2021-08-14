@@ -53,10 +53,8 @@ public class VendorDB
         db.Dispose();
         System.out.println("Vendor updated successfully!");
     }
-    public static ResultSet search(String filter) {
-        DBConnect db = new DBConnect();
+    public static ResultSet search(String filter, DBConnect db) {
         ResultSet rs = db.SqlSelectAll("SELECT * FROM vendor WHERE vendor_id LIKE '%" + filter + "%' OR title LIKE '%" + filter + "%' OR phone LIKE '%" + filter + "%'");
-        db.Dispose();
         return rs;
     }
     

@@ -51,13 +51,12 @@ public class InventoryDB {
         System.out.println("Inventory Item removed successfully!");
     }
 
-    public static ResultSet search(String filter)
+    public static ResultSet Search (String filter, DBConnect db)
     {
-        DBConnect DB = new DBConnect();
-        ResultSet rs = DB.SqlSelectAll("SELECT * FROM employee WHERE empl_id LIKE '%" + filter + "%' OR lname LIKE '%" + filter + "%' OR username LIKE '%" + filter + "%'");
-        DB.Dispose();
+        ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id LIKE '%" + filter + "%'");
         return rs;
     }
+   
 
      public static void update(String equip_ID, String newTitle, String newAvailable, String newTotal) {
         DBConnect db = new DBConnect();

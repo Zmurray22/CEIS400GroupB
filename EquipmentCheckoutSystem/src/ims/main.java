@@ -29,7 +29,7 @@ public class main {
                 break;
             case 3:
                 System.out.println("Check Out Equipment\n\n");
-                checkOut();
+                /*checkOut();*/
                 break;
             case 4:
                 System.out.println("Check In Equipment\n\n");
@@ -148,12 +148,12 @@ public class main {
         
     }
     
-    public static void checkOut(){
+    /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
         System.out.println("What is the equipment ID of the Equipment you need:");
         String EquipID = selection.nextLine();
-        System.out.println(InventoryDB.search(EquipID));        
-    }
+        System.out.println(InventoryDB.Search(EquipID, db));        
+    }*/
     
     public static void checkIn(){
         DBConnect db = new DBConnect();

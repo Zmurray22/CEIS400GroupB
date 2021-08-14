@@ -103,10 +103,8 @@ public class EmployeeDB {
         db.Dispose();
         System.out.println("User profile updated successfully!");
     }
-    public static ResultSet search(String filter) {
-        DBConnect db = new DBConnect();
+    public static ResultSet search(String filter, DBConnect db) {
         ResultSet rs = db.SqlSelectAll("SELECT * FROM employee WHERE empl_id LIKE '%" + filter + "%' OR lname LIKE '%" + filter + "%' OR username LIKE '%" + filter + "%'");
-        db.Dispose();
         return rs;
     }
     
