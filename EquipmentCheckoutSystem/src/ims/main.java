@@ -47,20 +47,6 @@ public class main {
         }while(choice != 0);
     }
                   
-    public static byte mainMenu() {
-        //Main menu method
-      Scanner selection = new Scanner(System.in);  // Create a Scanner object
-      
-      System.out.println("1 - Test Connection");
-      System.out.println("2 - Log In");// Temporarily Optional for testing purposes
-      System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
-      System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
-      System.out.println("5 - Launch GUI Application");
-      System.out.println("0 - Close app");
-      byte answer = selection.nextByte();
-      return answer;    
-  }
-    
     public static void testDatabase(){
         DBConnect db = new DBConnect();
         
@@ -86,6 +72,21 @@ public class main {
                 System.out.println("This method failed");
         }
     }
+    
+    public static byte mainMenu() {
+        //Main menu method
+      Scanner selection = new Scanner(System.in);  // Create a Scanner object
+      
+      System.out.println("1 - Test Connection");
+      System.out.println("2 - Log In");// Temporarily Optional for testing purposes
+      System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
+      System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
+      System.out.println("5 - Launch GUI Application");
+      System.out.println("0 - Close app");
+      byte answer = selection.nextByte();
+      return answer;    
+  }
+    
     public static void launchGUI()
     {
         Login_Form form = new Login_Form();
