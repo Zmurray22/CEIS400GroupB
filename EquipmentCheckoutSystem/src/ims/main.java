@@ -122,19 +122,19 @@ public class main {
 
             switch (answer){
                 case 1:
-                    System.out.println("User Profile\n" + "*".repeat(12));
+                    System.out.println("View Profile\n" + "*".repeat(12));
 
                     break;
                 case 2:
-                    System.out.println("User Profile\n" + "*".repeat(12));
+                    System.out.println("View Account\n" + "*".repeat(12));
 
                     break;
                 case 3:
-                    System.out.println("User Profile\n" + "*".repeat(12));
+                    System.out.println("Checkout Equipment\n" + "*".repeat(18));
 
                     break;
                 case 4:
-                    System.out.println("User Profile\n" + "*".repeat(12));
+                    System.out.println("Check In Equipment\n" + "*".repeat(18));
 
                     break;
                 case 0:
