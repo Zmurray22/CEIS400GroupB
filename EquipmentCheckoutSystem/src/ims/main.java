@@ -25,6 +25,7 @@ public class main {
             case 2:
                 System.out.println("Log In Menu\n\n");
                 logIn();
+
                 break;
             case 3:
                 System.out.println("Check Out Equipment\n\n");
@@ -94,7 +95,7 @@ public class main {
         form.setVisible(true);
     }
 
-    public static byte logIn(){
+    public static void logIn(){
         Scanner selection = new Scanner(System.in);
         System.out.println("Username:");
         String name = selection.nextLine();
@@ -103,20 +104,48 @@ public class main {
         String pswd = selection.nextLine();
         Boolean log = dbms.EmployeeDB.authenticate(name, pswd);
         //Use EmplyeeDB to check credentials and if true forward to normal user menu
+        byte answer = 0;
         
-        if (log == true){
-            System.out.println("1 - View Profile");
-            System.out.println("2 - View Account");// Temporarily Optional for testing purposes
-            System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
-            System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
-            System.out.println("0 - Exit");
-            byte answer = selection.nextByte();
-            return answer;
-        }
-        else{
-            System.out.println("Incorrect credentials!");
-            return 5;
-        }
+        do{
+            if (log == true){//Log in success, display user menu
+                System.out.println("1 - View Profile");
+                System.out.println("2 - View Account");// Temporarily Optional for testing purposes
+                System.out.println("3 - Checkout Equipment");//Go straight to Inventory Menu
+                System.out.println("4 - Check In Equipment");//Go to account menu for selecting returns
+                System.out.println("0 - Exit");
+                answer = selection.nextByte();
+            }
+            else{//Login fails, go back to log in menu
+                System.out.println("Incorrect credentials!");
+                return;
+            }
+
+            switch (answer){
+                case 1:
+                    System.out.println("User Profile\n" + "*".repeat(12));
+
+                    break;
+                case 2:
+                    System.out.println("User Profile\n" + "*".repeat(12));
+
+                    break;
+                case 3:
+                    System.out.println("User Profile\n" + "*".repeat(12));
+
+                    break;
+                case 4:
+                    System.out.println("User Profile\n" + "*".repeat(12));
+
+                    break;
+                case 0:
+                    break;
+
+            }
+        }while(answer != 0);    
+    }
+    
+    public static void employeeMenu(){
+        
     }
     
     public static void checkOut(){
