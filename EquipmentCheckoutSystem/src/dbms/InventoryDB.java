@@ -1,6 +1,9 @@
 package dbms;
 
 //Table Columns: equip_id | title | available | total | vendor_id
+
+import java.sql.ResultSet;
+
 public class InventoryDB {
 
     public InventoryDB()
@@ -48,10 +51,10 @@ public class InventoryDB {
         System.out.println("Inventory Item removed successfully!");
     }
 
-    public static String search(String filter)
+    public static ResultSet search(String filter)
     {
         DBConnect DB = new DBConnect();
-        String rs = DB.SqlSelectSingle("SELECT title FROM Inventory WHERE equip_id = " + filter);
+        ResultSet rs = DB.SqlSelectAll("SELECT * FROM employee WHERE empl_id LIKE '%" + filter + "%' OR lname LIKE '%" + filter + "%' OR username LIKE '%" + filter + "%'");
         DB.Dispose();
         return rs;
     }

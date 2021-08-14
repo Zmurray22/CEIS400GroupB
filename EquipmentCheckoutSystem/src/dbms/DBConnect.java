@@ -27,7 +27,7 @@ public class DBConnect
                 //statement
                 System.out.println("Connection Successful!");
                 int count = 0;
-                ResultSet result = SqlSelectAll("SELECT * FROM employee"); // Use our class method to run the query for us.
+                /*ResultSet result = SqlSelectAll("SELECT * FROM employee"); // Use our class method to run the query for us.
                 //if you want to run the console without the employee database showing up, comment out the result set function to the result.close, and prior to the catch SQLExecution ex
                 while (result.next()){
                     String emplID = result.getString("empl_id");
@@ -37,7 +37,7 @@ public class DBConnect
                     String output = "User #%d: %s - %s - %s - %s";
                     System.out.println(String.format(output, ++count, emplID, fName, lName, access));
                 }
-                result.close(); // Always make sure to close your result sets
+                result.close();*/ // Always make sure to close your result sets
 
             } catch (SQLException ex) {
                 ex.printStackTrace();
