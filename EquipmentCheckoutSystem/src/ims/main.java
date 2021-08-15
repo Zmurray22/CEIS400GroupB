@@ -145,7 +145,10 @@ public class main {
     }
     
     public static void employeeMenu(){
-        
+        //Pull employee record from the database with username entered earlier
+        //List employee profile data
+        //Check for account table under user's name
+        //Pull Account data and list
     }
     
     /*public static void checkOut(){
