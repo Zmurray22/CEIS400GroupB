@@ -5,11 +5,11 @@ package dbms;
 import java.time.LocalDate;
 import com.sun.jdi.connect.spi.Connection;
 import java.sql.*;
-
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+// fields- equip_id | title | qty | date
 public class Account {
-    private String borrowedItems;
-    private int borrowedQty;
-    private LocalDate dateBorrowed;
 
     public void Account(){
        
@@ -17,14 +17,11 @@ public class Account {
     
     public static boolean checkExists(String table){
         DBConnect db = new DBConnect();
-        table = "SELECT count(*) "
-                + "FROM information_schema.tables "
-                + "WHERE table_name = ?"
-                + "LIMIT 1;";
+        String query = "SHOW TABLES LIKE '" + table + "'";
         
-        String exists = db.SqlSelectSingle(table);
+        String exists = db.SqlSelectSingle(query);
         db.Dispose();
-        return Integer.parseInt(exists) != 0;       
+        return !"0".equals(exists);       
     }
     
     public static void createAcc(String table){
@@ -42,8 +39,47 @@ public class Account {
         return rs;
     }
     
-    private void update(){
-    
+    public static void update(String equip_id, String qty) throws ParseException{
+        String string = "January 2, 2010";
+        Date date = (Date) new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
     //aggregate changes and update through db.sqlUpdate()
+    //In Construction!!
+    }
+    
+    public static String userProfile(String username) throws SQLException{
+        DBConnect db = new DBConnect();
+        //Pull employee profile record from the database with username entered earlier
+        //Create array to hold the fields
+        ResultSet rs = EmployeeDB.search(username);
+        String[] profileArr = new String[6];
+        while(rs.next()){
+            for (int i = 1; i < 7; i++){
+                String record = rs.getString(i);
+                profileArr[i-1] = record;
+            }
+        }
+        //Print the profile data
+        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
+                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
+                profileArr[4] + "\nUsername: " + profileArr[5]);
+        
+        return profileArr[1] + "_" + profileArr[2];
+    }
+    
+    public static void showAccount(String username) throws SQLException{
+         //Check for account table under user's name
+        DBConnect db = new DBConnect();
+        
+        String tableName = Account.userProfile(username);
+        if (Account.checkExists(tableName)){
+            System.out.println("Account exists");
+            ResultSet rs = Account.search(tableName);
+            String[] accountArr = new String[4];
+            while(rs.next()){
+                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
+                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
+            }
+        }          
+        db.Dispose();
     }
 }

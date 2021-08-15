@@ -396,15 +396,15 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             //Open the Database and run the search for that EquipID and it's respective information
             DBConnect db = new DBConnect();
         try{
-            ResultSet rs = InventoryDB.search(equipID, db);
+        ResultSet rs = InventoryDB.search(equipID, db);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while(rs.next())
+        {
+        model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString("total"), rs.getString("vendor_id")});
+        }
+        rs.close();
         
-            while(rs.next())
-                {
-                    ArrListObj.add(rs.getString(1));
-                    order = ArrListObj.toArray(order);
-                }
-            JOptionPane.showMessageDialog(this, order);
-            rs.close();
         }catch(Exception ex)
         {
             JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
@@ -413,8 +413,64 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
+    //Delete the searched entry from the database **EQUIPMANAGER ONLY**
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        
+        String equipID = txtEquipID.getText();
+        DBConnect db = new DBConnect();
+        if(equipID.equals(""))
+        {
+        JOptionPane.showMessageDialog(this, "Error. Please enter the Equipment ID associated with the Inventory Item you wish to delete.",
+"Error", JOptionPane.ERROR_MESSAGE);
+        }
+        //If EquipID information is present, continue with the search..
+        try{
+            ResultSet rs = InventoryDB.search(equipID, db);
+            DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+            model.setRowCount(0); //This is essential to clear the table prior to searching
+            while(rs.next())
+                {
+                   model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString("total"), rs.getString("vendor_id")});
+                }
+            
+           if(JOptionPane.showConfirmDialog(frame, "Confirm if you wish to delete the shown data entry.", "Equipment Search",
+                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+           {
+               db.SqlDelete("Inventory", "equip_id = " + equipID);
+           }
+            rs.close();
+            
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+        //Closing the connection to the Database
+        
+        
+        //After complete, refresh the menu with the updated database
+        
+        txtEquipID.setText("");
+        txtEquipTitle.setText("");
+        txtNumAvailable.setText("");
+        txtTotalStock.setText("");
+        txtVendorID.setText("");
+        
+        String sql = ("SELECT * FROM Inventory");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     //The Equipment ID isn't needed here because the InventoryDB.add function allocates a new EquipID to the equipment.
@@ -430,8 +486,31 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         //Run the Add function in InventoryDB
         if (dataValidations() == 1)
         {
-            JOptionPane.showMessageDialog(this, "Validation success.");
+            JOptionPane.showMessageDialog(this, "Validation success. Adding entries into the Database now. Page will refresh automatically.");
             InventoryDB.add(equipTitle, numAvailable, totalStock, vendorID);
+        }
+        
+        //Page Refresh
+        txtEquipID.setText("");
+        txtEquipTitle.setText("");
+        txtNumAvailable.setText("");
+        txtTotalStock.setText("");
+        txtVendorID.setText("");
+        
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM Inventory");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
         }
         
         

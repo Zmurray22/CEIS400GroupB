@@ -134,11 +134,11 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-                    userProfile(username);
+                    Account.userProfile(username);
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
-
+                    Account.showAccount(username);
                     break;
                 case 3:
                     System.out.println("Checkout Equipment\n" + "*".repeat(18));
@@ -154,31 +154,7 @@ public class main {
             }
         }while(answer != 0);    
     }
-    
-    public static void userProfile(String username) throws SQLException{
-        DBConnect db = new DBConnect();
-        //Pull employee profile record from the database with username entered earlier
-        //Create array to hold the fields
-        ResultSet rs = EmployeeDB.search(username);
-        String[] profileArr = new String[6];
-        while(rs.next()){
-            for (int i = 1; i < 7; i++){
-                String record = rs.getString(i);
-                profileArr[i-1] = record;
-            }
-        }
-        //Print the profile data
-        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
-                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
-                profileArr[4] + "\nUsername: " + profileArr[5]);
-        
-//Check for account table under user's name
-        String tableName = profileArr[1] + "_" + profileArr[2];
-        Account.checkExists(tableName);
-        //String table = fname + "_" + lname;
-        //Account.checkExists();
-        db.Dispose();
-    }
+
     
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
