@@ -29,6 +29,9 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     //Global Variables
     String[] order = {};
     
+    //Items variable to be tagged onto the User upon Checkout
+    String[] Items = {};
+    
     public Equipment_Search_Form() {
         initComponents();
         
@@ -430,7 +433,27 @@ private JFrame frame;
     //Order button to confirm the Cart list to the Account user
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-    
+        Arrays.toString(Items);
+        ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
+        //Grab the List of Equipment ID ArrayList 
+        //Validation that there is something in the ArrayList
+        if(order.length == 0)
+        {
+        JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
+"Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        //use the ArrayList to locate each Equipment associated with that ID
+        String rs = "";
+        DBConnect db = new DBConnect();
+        for(String ID : order)
+        {
+             rs = db.SqlSelectSingle("SELECT title FROM Inventory WHERE equip_id = " + ID);
+             ArrListItems.add(rs);
+             Items = ArrListItems.toArray(Items);
+        }       
+        JOptionPane.showMessageDialog(this, Items);
+        
     }//GEN-LAST:event_btnOrderActionPerformed
 
     //Empty the input fields and Refresh the table
