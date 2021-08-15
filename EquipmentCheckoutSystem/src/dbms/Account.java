@@ -3,7 +3,7 @@
 package dbms;
 
 import java.time.LocalDate;
-
+import com.sun.jdi.connect.spi.Connection;
 public class Account {
     private String borrowedItems;
     private int borrowedQty;
@@ -35,6 +35,10 @@ public class Account {
 
     public void setDateBorrowed(LocalDate dateBorrowed) {
         this.dateBorrowed = dateBorrowed;
+    }
+    
+    public static void checkExists(Connection con, String table){
+        
     }
     
     public void createAcc(){

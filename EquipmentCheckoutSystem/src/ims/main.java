@@ -20,7 +20,7 @@ import javax.swing.JFrame;
 
 //test for Zach
 public class main { 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         //DBConnect db = new DBConnect();
         byte choice;
         do{
@@ -106,7 +106,7 @@ public class main {
         form.setVisible(true);
     }
 
-    public static void logIn(){
+    public static void logIn() throws SQLException{
         Scanner selection = new Scanner(System.in);
         System.out.println("Username:");
         String username = selection.nextLine();
@@ -134,7 +134,7 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-                    employeeMenu(username);
+                    userProfile(username);
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
@@ -158,11 +158,18 @@ public class main {
     public static void userProfile(String username) throws SQLException{
         DBConnect db = new DBConnect();
         //Pull employee profile record from the database with username entered earlier
+        //Create array to hold the fields
         ResultSet rs = EmployeeDB.search(username);
+        String[] profileArr = new String[6];
         while(rs.next()){
-            String record = rs.getString(username)
-            System.out.println(record);
+            for (int i = 1; i < 7; i++){
+                String record = rs.getString(i);
+                profileArr[i-1] = record;
+            }
         }
+        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
+                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
+                profileArr[4] + "\nUsername: " + profileArr[5]);
         //Check for account table under user's name
         //String table = fname + "_" + lname;
         //Account.checkExists();
