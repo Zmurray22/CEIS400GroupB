@@ -5,12 +5,9 @@ package dbms;
 import java.sql.ResultSet;
 
 public class InventoryDB {
-
-    public InventoryDB()
-    {
-
-    }
-
+    
+    public static void InventoryDB(){
+}
     
     public static void add (String equipTitle, String numAvailable, String totalStock, String vendorID)
     {

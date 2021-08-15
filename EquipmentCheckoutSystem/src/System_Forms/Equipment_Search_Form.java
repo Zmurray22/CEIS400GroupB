@@ -9,6 +9,8 @@ import dbms.DBConnect;
 import dbms.InventoryDB;
 import java.awt.Image;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -23,6 +25,10 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     /**
      * Creates new form Equipment_Search_Form
      */
+    
+    //Global Variables
+    String[] order = {};
+    
     public Equipment_Search_Form() {
         initComponents();
         
@@ -83,11 +89,10 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txtVendorID = new javax.swing.JTextField();
         btnInventorySearch = new javax.swing.JButton();
+        btnAddToCart = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnReset = new javax.swing.JButton();
-        btnExit = new javax.swing.JButton();
+        btnOrder = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         EquipTable = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -153,6 +158,14 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             }
         });
 
+        btnAddToCart.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnAddToCart.setText("Add to Cart");
+        btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddToCartActionPerformed(evt);
+            }
+        });
+
         btnDelete.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -161,35 +174,19 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
         btnAdd.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnAdd.setText("Add");
+        btnAdd.setText("Add to Database");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
-        btnReset.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnReset.setText("Reset");
-        btnReset.addActionListener(new java.awt.event.ActionListener() {
+        btnOrder.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnOrder.setText("Order");
+        btnOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnResetActionPerformed(evt);
-            }
-        });
-
-        btnExit.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnExit.setText("Exit");
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
+                btnOrderActionPerformed(evt);
             }
         });
 
@@ -198,10 +195,12 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnAddToCart, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOrder, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel1)
@@ -215,18 +214,12 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
                             .addComponent(txtNumAvailable)
                             .addComponent(txtTotalStock)
                             .addComponent(txtVendorID)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnInventorySearch, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 10, Short.MAX_VALUE))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,17 +248,15 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
                     .addComponent(txtVendorID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnInventorySearch)
-                    .addComponent(btnUpdate))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnDelete)
-                    .addComponent(btnAdd))
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnReset)
-                    .addComponent(btnExit))
-                .addGap(35, 35, 35))
+                    .addComponent(btnInventorySearch))
+                .addGap(18, 18, 18)
+                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnOrder, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAddToCart, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         EquipTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -381,15 +372,38 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnInventorySearchActionPerformed
 
+    //Adds the searched item to a cart (list) to be pushed to the Checkout
+    private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
+        // TODO add your handling code here:
+        String equipID = txtEquipID.getText();
+        Arrays.toString(order);
+        ArrayList<String>ArrListObj  = new ArrayList<String>(Arrays.asList(order));
+        //if the equipID has been input and is not empty
+        if(!equipID.equals(""))
+        {
+            //Open the Database and run the search for that EquipID and it's respective information
+            DBConnect db = new DBConnect();
+        try{
+            ResultSet rs = InventoryDB.search(equipID, db);
+        
+            while(rs.next())
+                {
+                    ArrListObj.add(rs.getString(1));
+                    order = ArrListObj.toArray(order);
+                }
+            JOptionPane.showMessageDialog(this, order);
+            rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+        db.Dispose(); //Closing the connection to the Database
+        }
+    }//GEN-LAST:event_btnAddToCartActionPerformed
+
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
-        
-        
     }//GEN-LAST:event_btnDeleteActionPerformed
-
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnUpdateActionPerformed
 
     //The Equipment ID isn't needed here because the InventoryDB.add function allocates a new EquipID to the equipment.
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
@@ -411,25 +425,17 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
-        // TODO add your handling code here:
-       
-    }//GEN-LAST:event_btnResetActionPerformed
-
 private JFrame frame;
-    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+
+    //Order button to confirm the Cart list to the Account user
+    private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        frame = new JFrame("Exit");
-        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "Equipment Search",
-                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
-        {
-            System.exit(0);
-        }
-    }//GEN-LAST:event_btnExitActionPerformed
+    
+    }//GEN-LAST:event_btnOrderActionPerformed
 
     //Empty the input fields and Refresh the table
     private void mnuRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRefreshActionPerformed
-       txtEquipID.setText("");
+        txtEquipID.setText("");
         txtEquipTitle.setText("");
         txtNumAvailable.setText("");
         txtTotalStock.setText("");
@@ -502,11 +508,10 @@ private JFrame frame;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable EquipTable;
     private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnAddToCart;
     private javax.swing.JButton btnDelete;
-    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnInventorySearch;
-    private javax.swing.JButton btnReset;
-    private javax.swing.JButton btnUpdate;
+    private javax.swing.JButton btnOrder;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
