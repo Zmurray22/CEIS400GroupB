@@ -45,4 +45,24 @@ public class Account {
     //aggregate changes and update through db.sqlUpdate()
     //In Construction!!
     }
+    
+    public static String userProfile(String username) throws SQLException{
+        DBConnect db = new DBConnect();
+        //Pull employee profile record from the database with username entered earlier
+        //Create array to hold the fields
+        ResultSet rs = EmployeeDB.search(username);
+        String[] profileArr = new String[6];
+        while(rs.next()){
+            for (int i = 1; i < 7; i++){
+                String record = rs.getString(i);
+                profileArr[i-1] = record;
+            }
+        }
+        //Print the profile data
+        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
+                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
+                profileArr[4] + "\nUsername: " + profileArr[5]);
+        
+        return profileArr[1] + "_" + profileArr[2];
+    }
 }

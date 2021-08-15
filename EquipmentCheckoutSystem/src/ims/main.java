@@ -134,7 +134,7 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-                    userProfile(username);
+                    Account.userProfile(username);
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
@@ -155,38 +155,21 @@ public class main {
         }while(answer != 0);    
     }
     
-    public static void userProfile(String username) throws SQLException{
-        DBConnect db = new DBConnect();
-        //Pull employee profile record from the database with username entered earlier
-        //Create array to hold the fields
-        ResultSet rs = EmployeeDB.search(username);
-        String[] profileArr = new String[6];
-        while(rs.next()){
-            for (int i = 1; i < 7; i++){
-                String record = rs.getString(i);
-                profileArr[i-1] = record;
-            }
-        }
-        //Print the profile data
-        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
-                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
-                profileArr[4] + "\nUsername: " + profileArr[5]);
+    public static void user(String username) throws SQLException{
+        
         
         //Check for account table under user's name
-        String tableName = profileArr[1] + "_" + profileArr[2];
+        DBConnect db = new DBConnect();
+        String tableName = Account.userProfile(username);
         if (Account.checkExists(tableName)){
             System.out.println("Account exists");
-            rs = Account.search(tableName);
+            ResultSet rs = Account.search(tableName);
             String[] accountArr = new String[4];
             while(rs.next()){
                 System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
                 " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
             }
-        }
-        //Print the profile data
-        //System.out.println("Equipment ID: " + accountArr[0] + " | Title: " + accountArr[1] + 
-        //        " | Quantity: " + accountArr[2] + " | Date: " + accountArr[3]);
-          
+        }          
         db.Dispose();
     }
     
