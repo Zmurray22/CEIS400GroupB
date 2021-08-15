@@ -15,30 +15,6 @@ public class Account {
        
     }
     
-    public String getBorrowedItems() {
-        return borrowedItems;
-    }
-
-    public void setBorrowedItems(String borrowedItems) {
-        this.borrowedItems = borrowedItems;
-    }
-
-    public int getBorrowedQty() {
-        return borrowedQty;
-    }
-
-    public void setBorrowedQty(int borrowedQty) {
-        this.borrowedQty = borrowedQty;
-    }
-
-    public LocalDate getDateBorrowed() {
-        return dateBorrowed;
-    }
-
-    public void setDateBorrowed(LocalDate dateBorrowed) {
-        this.dateBorrowed = dateBorrowed;
-    }
-    
     public static boolean checkExists(String table){
         DBConnect db = new DBConnect();
         table = "SELECT count(*) "
@@ -51,16 +27,23 @@ public class Account {
         return Integer.parseInt(exists) != 0;       
     }
     
-    public void createAcc(Connection con, String table){
+    public static void createAcc(String table){
         //Search for existing user account table
-        if (!checkExists(table)){
-            
-        }
+        
+        DBConnect db = new DBConnect();
+        db.SqlSelectSingle(table);
+        db.Dispose();
         //if exist do nothing
+    }
+
+    public static ResultSet search(String tableName) {
+        DBConnect db = new DBConnect();
+        ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
+        return rs;
     }
     
     private void update(){
     
-//aggregate changes and update through db.sqlUpdate()
+    //aggregate changes and update through db.sqlUpdate()
     }
 }

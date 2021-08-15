@@ -171,8 +171,10 @@ public class main {
         System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
                 "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
                 profileArr[4] + "\nUsername: " + profileArr[5]);
-        //Check for account table under user's name
         
+//Check for account table under user's name
+        String tableName = profileArr[1] + "_" + profileArr[2];
+        Account.checkExists(tableName);
         //String table = fname + "_" + lname;
         //Account.checkExists();
         db.Dispose();
