@@ -172,11 +172,20 @@ public class main {
                 "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
                 profileArr[4] + "\nUsername: " + profileArr[5]);
         
-//Check for account table under user's name
+        //Check for account table under user's name
         String tableName = profileArr[1] + "_" + profileArr[2];
-        Account.checkExists(tableName);
-        //String table = fname + "_" + lname;
-        //Account.checkExists();
+        if (Account.checkExists(tableName)){
+            rs = Account.search(tableName);
+            String[] accountArr = new String[4];
+            while(rs.next()){
+                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
+                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
+            }
+        }
+        //Print the profile data
+        //System.out.println("Equipment ID: " + accountArr[0] + " | Title: " + accountArr[1] + 
+        //        " | Quantity: " + accountArr[2] + " | Date: " + accountArr[3]);
+          
         db.Dispose();
     }
     

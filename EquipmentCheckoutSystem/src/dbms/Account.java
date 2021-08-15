@@ -5,7 +5,7 @@ package dbms;
 import java.time.LocalDate;
 import com.sun.jdi.connect.spi.Connection;
 import java.sql.*;
-
+// fields- equip_id | title | qty | date
 public class Account {
     private String borrowedItems;
     private int borrowedQty;
@@ -17,12 +17,9 @@ public class Account {
     
     public static boolean checkExists(String table){
         DBConnect db = new DBConnect();
-        table = "SELECT count(*) "
-                + "FROM information_schema.tables "
-                + "WHERE table_name = ?"
-                + "LIMIT 1;";
+        String query = "SHOW TABLES LIKE '" + table + "'";
         
-        String exists = db.SqlSelectSingle(table);
+        String exists = db.SqlSelectSingle(query);
         db.Dispose();
         return Integer.parseInt(exists) != 0;       
     }
