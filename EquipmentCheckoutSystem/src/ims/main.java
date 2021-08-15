@@ -155,15 +155,18 @@ public class main {
         }while(answer != 0);    
     }
     
-    public static void employeeMenu(String username) throws SQLException{
+    public static void userProfile(String username) throws SQLException{
         DBConnect db = new DBConnect();
         //Pull employee profile record from the database with username entered earlier
-        db.search();
-        System.out.println(EmployeeDB.search(username));
+        ResultSet rs = EmployeeDB.search(username);
+        while(rs.next()){
+            String record = rs.getString(username)
+            System.out.println(record);
+        }
         //Check for account table under user's name
-        String table = fname + "_" + lname;
-        Account.checkExists();
-    
+        //String table = fname + "_" + lname;
+        //Account.checkExists();
+    }
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
         System.out.println("What is the equipment ID of the Equipment you need:");
