@@ -88,5 +88,5 @@ public class EquipmentManager {
         public ResultSet() {
         } 
     }
-    
+     
 }
