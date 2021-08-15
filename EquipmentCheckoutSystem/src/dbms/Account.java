@@ -4,19 +4,13 @@ package dbms;
 
 import java.time.LocalDate;
 
-/**
- *
- * @author Zach
- */
 public class Account {
     private String borrowedItems;
     private int borrowedQty;
     private LocalDate dateBorrowed;
 
     public void Account(){
-        //Search for existing user account table
-        //if exist do nothing
-        //if not found, create table
+       
     }
     
     public String getBorrowedItems() {
@@ -41,6 +35,12 @@ public class Account {
 
     public void setDateBorrowed(LocalDate dateBorrowed) {
         this.dateBorrowed = dateBorrowed;
+    }
+    
+    public void createAcc(){
+         //Search for existing user account table
+        //if exist do nothing
+        //if not found, create table
     }
     
     private void update(){
