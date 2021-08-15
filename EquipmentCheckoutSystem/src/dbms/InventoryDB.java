@@ -12,35 +12,16 @@ public class InventoryDB {
     }
 
     
-    public static void add (String equipID, String title, int available, int total)
+    public static void add (String title, int available, int total, String vendorID)
     {
-        String errors = "";
-        boolean valid = true;
-        if (title.trim().equals("") || title.length() > 20) // Check if a blank vendor was added or the vendor's length is longer than database field
-        {
-            valid = false;
-            if (title.trim().equals(""))
-                errors += "blank Title\n";
-            else
-                errors += "Title is longer than 20 characters\n";
-        }
-        if (available > total) // The user is inputting a higher available amount than what the total is
-        {
-            valid = false;
-            errors += "Available number exceeds the total amount.";
-        }
-        
-        if (valid)
-        {
-            // Then create the database connection and insert the new Inventory item
+        //Get a new ID variable for the added Equipment
+        String newID = GetNewID();
+        //Validation is ran on the InventoryGUI, connecting to the Database and entering the information is below.
             DBConnect db = new DBConnect();
-            db.SqlInsert("Inventory", "equip_ID, title, available, total","'" + GetNewID() + 
-                    "', '" + title + "', '" + available +"");
+            db.SqlInsert("Inventory", "equip_id, title, available, total",""+ newID + 
+                    "', '" + title + "', '" + available +"', '"+ total +"', '" + vendorID);
             db.Dispose(); // Remember to run this to ensure that the database connection is closed
-            System.out.println("Inventory Item: " + title + " Available amount:" + available + " Total amount:" + total + " added successfully!");
-        }
-        else
-            System.out.println("The user could not be added for the following reason(s):\n" + errors);
+            System.out.println("Equipment ID: " + newID + " Inventory Item: " + title + " Available amount: " + available + " Total amount: " + total + "Vendor ID: " + vendorID +" added successfully!");  
     }
 
     static void delete(String equipID) 

@@ -315,7 +315,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         DBConnect db = new DBConnect();
         //Use the search function implemented in the InventoryDB file
         try{
-        ResultSet rs = InventoryDB.Search(EquipmentID, db);
+        ResultSet rs = InventoryDB.search(EquipmentID, db);
         DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
         model.setRowCount(0); //This is essential to clear the table prior to searching
         while(rs.next())
@@ -341,18 +341,22 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    //The Equipment ID isn't needed here because the InventoryDB.add function allocates a new EquipID to the equipment.
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         
         //Grab the neccessary input to add into the Inventory Database
-        String equipID = txtEquipID.getText();
         String equipTitle = txtEquipTitle.getText();
-       
-        
-        //Ensure connection to the Inventory Database
-        DBConnect db = new DBConnect();
+        String numAvailable = txtNumAvailable.getText();
+        String totalStock = txtTotalStock.getText();
+        String vendorID = txtVendorID.getText();
         
         //Run the Add function in InventoryDB
+        if (dataValidations() == 1)
+        {
+            JOptionPane.showMessageDialog(this, "Validation success.");
+            InventoryDB.add(equipTitle, Integer.parseInt(numAvailable), Integer.parseInt(totalStock), vendorID);
+        }
         
         
     }//GEN-LAST:event_btnAddActionPerformed
@@ -416,4 +420,52 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     private javax.swing.JTextField txtVendorID;
     // End of variables declaration//GEN-END:variables
 
+//Data validation for the add function
+public int dataValidations() {
+String equipTitle = txtEquipTitle.getText();
+String numAvailable = txtNumAvailable.getText();
+String totalStock = txtTotalStock.getText();
+String vendorID = txtVendorID.getText();
+
+if (equipTitle.equals("") || equipTitle.length() > 20) {
+JOptionPane.showMessageDialog(this, "Error. Equipment Title field input needs to be not empty and less than 20 total characters including spaces.",
+"Error", JOptionPane.ERROR_MESSAGE);
+txtEquipTitle.setText("");
+txtEquipTitle.requestFocus();
+return 0;
+}
+
+//Ensure all these inputs are numbers
+try {
+Integer.parseInt(numAvailable);
+Integer.parseInt(totalStock);
+Integer.parseInt(vendorID);
+
+} catch (NumberFormatException e) {
+JOptionPane.showMessageDialog(this, "Incorrect Input. Ensure that Number Available, Total Stock, and Vendor ID are all numbers.",
+"Input Error", JOptionPane.ERROR_MESSAGE);
+txtNumAvailable.setText("");
+txtTotalStock.setText("");
+txtVendorID.setText("");
+return 0;
+}
+//Ensure Number Available is not higher than Total Stock
+if (Integer.parseInt(numAvailable) > Integer.parseInt(totalStock)) {
+JOptionPane.showMessageDialog(this, "Available must not exceed Total Stock entered",
+"Input Error", JOptionPane.ERROR_MESSAGE);
+txtNumAvailable.setText("");
+txtTotalStock.setText("");
+txtNumAvailable.requestFocusInWindow();
+return 0;
+}
+//Ensure VendorID is not 0
+if (Integer.parseInt(vendorID) < 0) {
+JOptionPane.showMessageDialog(this, "Vendor ID must be more than 0",
+"Vendor ID Error", JOptionPane.ERROR_MESSAGE);
+txtVendorID.setText("");
+txtVendorID.requestFocusInWindow();
+return 0;
+}
+return 1;
+}
 }
