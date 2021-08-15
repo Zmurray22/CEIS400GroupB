@@ -1,8 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+///Receives updates to account to create/update employee account table.
+//Database Account table does not exist for a user until they rent equipment.
 package ims;
 
 import java.time.LocalDate;
@@ -15,9 +12,13 @@ public class Account {
     private String borrowedItems;
     private int borrowedQty;
     private LocalDate dateBorrowed;
-    private int returnedQty;
-    private LocalDate returnedDate;
 
+    public void Account(){
+        //Search for existing user account table
+        //if exist do nothing
+        //if not found, create table
+    }
+    
     public String getBorrowedItems() {
         return borrowedItems;
     }
@@ -41,20 +42,9 @@ public class Account {
     public void setDateBorrowed(LocalDate dateBorrowed) {
         this.dateBorrowed = dateBorrowed;
     }
-
-    public int getReturnedQty() {
-        return returnedQty;
+    
+    private void update(){
+    
+//aggregate changes and update through db.sqlUpdate()
     }
-
-    public void setReturnedQty(int returnedQty) {
-        this.returnedQty = returnedQty;
-    }
-
-    public LocalDate getReturnedDate() {
-        return returnedDate;
-    }
-
-    public void setReturnedDate(LocalDate returnedDate) {
-        this.returnedDate = returnedDate;
-    } 
 }
