@@ -21,7 +21,7 @@ public class Account {
         
         String exists = db.SqlSelectSingle(query);
         db.Dispose();
-        return Integer.parseInt(exists) != 0;       
+        return !"0".equals(exists);       
     }
     
     public static void createAcc(String table){

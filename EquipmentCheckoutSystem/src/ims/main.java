@@ -175,6 +175,7 @@ public class main {
         //Check for account table under user's name
         String tableName = profileArr[1] + "_" + profileArr[2];
         if (Account.checkExists(tableName)){
+            System.out.println("Account exists");
             rs = Account.search(tableName);
             String[] accountArr = new String[4];
             while(rs.next()){
