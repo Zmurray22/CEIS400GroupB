@@ -138,7 +138,7 @@ public class main {
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
-
+                    Account.showAccount(username);
                     break;
                 case 3:
                     System.out.println("Checkout Equipment\n" + "*".repeat(18));
@@ -154,24 +154,7 @@ public class main {
             }
         }while(answer != 0);    
     }
-    
-    public static void user(String username) throws SQLException{
-        
-        
-        //Check for account table under user's name
-        DBConnect db = new DBConnect();
-        String tableName = Account.userProfile(username);
-        if (Account.checkExists(tableName)){
-            System.out.println("Account exists");
-            ResultSet rs = Account.search(tableName);
-            String[] accountArr = new String[4];
-            while(rs.next()){
-                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
-                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
-            }
-        }          
-        db.Dispose();
-    }
+
     
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
