@@ -3,6 +3,12 @@ package ims;
 import System_Forms.Login_Form;
 import dbms.DBConnect;
 import dbms.InventoryDB;
+import dbms.EmployeeDB;
+import dbms.VendorDB;
+import dbms.Account;
+import dbms.EquipmentRequest;
+import ims.EquipmentManager;
+import ims.MaintEmployee;
 import java.util.Scanner;
 import javax.swing.JFrame;
 //testing for push and pull from github desktop
@@ -98,11 +104,11 @@ public class main {
     public static void logIn(){
         Scanner selection = new Scanner(System.in);
         System.out.println("Username:");
-        String name = selection.nextLine();
+        String username = selection.nextLine();
         
         System.out.println("Password:");
         String pswd = selection.nextLine();
-        Boolean log = dbms.EmployeeDB.authenticate(name, pswd);
+        Boolean log = dbms.EmployeeDB.authenticate(username, pswd);
         //Use EmplyeeDB to check credentials and if true forward to normal user menu
         byte answer = 0;
         
@@ -123,7 +129,7 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-
+                    employeeMenu(username);
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
@@ -144,8 +150,10 @@ public class main {
         }while(answer != 0);    
     }
     
-    public static void employeeMenu(){
-        //Pull employee record from the database with username entered earlier
+    public static void employeeMenu(String username){
+        DBConnect db = new DBConnect();
+//Pull employee record from the database with username entered earlier
+        System.out.println(EmployeeDB.search(username));
         //List employee profile data
         //Check for account table under user's name
         //Pull Account data and list
