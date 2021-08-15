@@ -34,7 +34,6 @@ public class InventoryDB {
     {
         ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id LIKE '%" + filter + "%'");
         return rs;
-        db.Dispose();
     }
    
 
