@@ -5,11 +5,11 @@ package dbms;
 import java.time.LocalDate;
 import com.sun.jdi.connect.spi.Connection;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 // fields- equip_id | title | qty | date
 public class Account {
-    private String borrowedItems;
-    private int borrowedQty;
-    private LocalDate dateBorrowed;
 
     public void Account(){
        
@@ -39,8 +39,10 @@ public class Account {
         return rs;
     }
     
-    private void update(){
-    
+    public static void update(String equip_id, String qty) throws ParseException{
+        String string = "January 2, 2010";
+        Date date = (Date) new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
     //aggregate changes and update through db.sqlUpdate()
+    //In Construction!!
     }
 }
