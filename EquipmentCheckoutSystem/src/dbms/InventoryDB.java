@@ -17,7 +17,7 @@ public class InventoryDB {
             DBConnect db = new DBConnect();
             
             db.SqlInsert("Inventory", "equip_id, title, available, total, vendor_id", "'" + newID + 
-                    "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '" + vendorID + "'");
+                    "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '"+ "00" + vendorID + "'");
             db.Dispose(); // Remember to run this to ensure that the database connection is closed
             System.out.println( " has been put into the database.");  
     }

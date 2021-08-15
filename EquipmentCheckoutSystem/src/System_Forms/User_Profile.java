@@ -43,15 +43,15 @@ public class User_Profile extends javax.swing.JFrame {
         EquipTable = new javax.swing.JTable();
         btnReturnItems = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPaneFirstName = new javax.swing.JTextPane();
+        txtFirstName = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextPaneLastName = new javax.swing.JTextPane();
+        txtLastName = new javax.swing.JTextPane();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextPaneUserID = new javax.swing.JTextPane();
+        txtUserID = new javax.swing.JTextPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnuDashboard = new javax.swing.JMenuItem();
+        mnuExit = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,11 +91,11 @@ public class User_Profile extends javax.swing.JFrame {
             }
         });
 
-        jScrollPane2.setViewportView(jTextPaneFirstName);
+        jScrollPane2.setViewportView(txtFirstName);
 
-        jScrollPane3.setViewportView(jTextPaneLastName);
+        jScrollPane3.setViewportView(txtLastName);
 
-        jScrollPane4.setViewportView(jTextPaneUserID);
+        jScrollPane4.setViewportView(txtUserID);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -158,21 +158,21 @@ public class User_Profile extends javax.swing.JFrame {
 
         jMenu1.setText("File");
 
-        jMenuItem1.setText("Dashboard");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        mnuDashboard.setText("Dashboard");
+        mnuDashboard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                mnuDashboardActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jMenu1.add(mnuDashboard);
 
-        jMenuItem2.setText("Exit");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        mnuExit.setText("Exit");
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                mnuExitActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem2);
+        jMenu1.add(mnuExit);
 
         jMenuBar1.add(jMenu1);
 
@@ -197,7 +197,7 @@ public class User_Profile extends javax.swing.JFrame {
 
 private JFrame frame;
     
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
         // TODO add your handling code here:
         frame = new JFrame("Exit");
         if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "User Profile",
@@ -205,15 +205,15 @@ private JFrame frame;
         {
             System.exit(0);
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_mnuExitActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void mnuDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDashboardActionPerformed
         // TODO add your handling code here:
         User_Dashboard_Form ud = new User_Dashboard_Form();
         ud.show();
         
         dispose();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_mnuDashboardActionPerformed
 
     private void btnReturnItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemsActionPerformed
         // TODO add your handling code here:
@@ -266,15 +266,15 @@ private JFrame frame;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextPane jTextPaneFirstName;
-    private javax.swing.JTextPane jTextPaneLastName;
-    private javax.swing.JTextPane jTextPaneUserID;
+    private javax.swing.JMenuItem mnuDashboard;
+    private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JTextPane txtFirstName;
+    private javax.swing.JTextPane txtLastName;
+    private javax.swing.JTextPane txtUserID;
     // End of variables declaration//GEN-END:variables
 }
