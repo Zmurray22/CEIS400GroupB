@@ -1,6 +1,6 @@
 ///Receives updates to account to create/update employee account table.
 //Database Account table does not exist for a user until they rent equipment.
-package ims;
+package dbms;
 
 import java.time.LocalDate;
 
