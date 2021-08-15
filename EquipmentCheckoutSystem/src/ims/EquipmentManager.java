@@ -12,15 +12,12 @@ import dbms.DBConnect;
 
 import dbms.EquipmentRequest;
 
-import dbms.OrderDetail;
 
 
 
 public class EquipmentManager {
 
     private static String username;
-    public static void main(String[] args) {
-    }
     private String fName;
     private String lName;
     private String password;
@@ -92,4 +89,4 @@ public class EquipmentManager {
         } 
     }
     
-    }
+}
