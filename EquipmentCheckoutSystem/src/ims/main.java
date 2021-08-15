@@ -1,6 +1,10 @@
 package ims;
 
 import System_Forms.Login_Form;
+import com.sun.jdi.connect.spi.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.DatabaseMetaData;
 import dbms.DBConnect;
 import dbms.InventoryDB;
 import dbms.EmployeeDB;
@@ -9,6 +13,7 @@ import dbms.Account;
 import dbms.EquipmentRequest;
 import ims.EquipmentManager;
 import ims.MaintEmployee;
+import java.sql.SQLException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 //testing for push and pull from github desktop
@@ -150,14 +155,14 @@ public class main {
         }while(answer != 0);    
     }
     
-    public static void employeeMenu(String username){
+    public static void employeeMenu(String username) throws SQLException{
         DBConnect db = new DBConnect();
-//Pull employee record from the database with username entered earlier
+        //Pull employee profile record from the database with username entered earlier
+        db.search();
         System.out.println(EmployeeDB.search(username));
-        //List employee profile data
         //Check for account table under user's name
-        //Pull Account data and list
-    }
+        String table = fname + "_" + lname;
+        Account.checkExists();
     
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
