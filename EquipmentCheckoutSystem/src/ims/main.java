@@ -167,13 +167,17 @@ public class main {
                 profileArr[i-1] = record;
             }
         }
+        //Print the profile data
         System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
                 "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
                 profileArr[4] + "\nUsername: " + profileArr[5]);
         //Check for account table under user's name
+        
         //String table = fname + "_" + lname;
         //Account.checkExists();
+        db.Dispose();
     }
+    
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);
         System.out.println("What is the equipment ID of the Equipment you need:");
