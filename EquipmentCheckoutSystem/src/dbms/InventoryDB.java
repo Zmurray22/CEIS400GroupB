@@ -12,16 +12,17 @@ public class InventoryDB {
     }
 
     
-    public static void add (String title, int available, int total, String vendorID)
+    public static void add (String equipTitle, String numAvailable, String totalStock, String vendorID)
     {
         //Get a new ID variable for the added Equipment
         String newID = GetNewID();
         //Validation is ran on the InventoryGUI, connecting to the Database and entering the information is below.
             DBConnect db = new DBConnect();
-            db.SqlInsert("Inventory", "equip_id, title, available, total",""+ newID + 
-                    "', '" + title + "', '" + available +"', '"+ total +"', '" + vendorID);
+            
+            db.SqlInsert("Inventory", "equip_id, title, available, total, vendor_id", "'" + newID + 
+                    "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '" + vendorID + "'");
             db.Dispose(); // Remember to run this to ensure that the database connection is closed
-            System.out.println("Equipment ID: " + newID + " Inventory Item: " + title + " Available amount: " + available + " Total amount: " + total + "Vendor ID: " + vendorID +" added successfully!");  
+            System.out.println( " has been put into the database.");  
     }
 
     static void delete(String equipID) 

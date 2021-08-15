@@ -44,9 +44,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         {
             JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
         }
-        
-        JOptionPane.showMessageDialog(this, "NOTE: When searching the database, all that is required is to input the Equipment ID");
-    }
+       }
     
     // function to display image in jlabel
     public void displayImage()
@@ -92,6 +90,10 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         EquipTable = new javax.swing.JTable();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnuRefresh = new javax.swing.JMenuItem();
+        mnuExit = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -300,8 +302,30 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 559, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("File");
+
+        mnuRefresh.setText("Page Refresh");
+        mnuRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRefreshActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuRefresh);
+
+        mnuExit.setText("Exit");
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuExit);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -381,7 +405,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         if (dataValidations() == 1)
         {
             JOptionPane.showMessageDialog(this, "Validation success.");
-            InventoryDB.add(equipTitle, Integer.parseInt(numAvailable), Integer.parseInt(totalStock), vendorID);
+            InventoryDB.add(equipTitle, numAvailable, totalStock, vendorID);
         }
         
         
@@ -389,11 +413,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
 
     private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
         // TODO add your handling code here:
-        txtEquipID.setText("");
-        txtEquipTitle.setText("");
-        txtNumAvailable.setText("");
-        txtTotalStock.setText("");
-        txtVendorID.setText("");
+       
     }//GEN-LAST:event_btnResetActionPerformed
 
 private JFrame frame;
@@ -406,6 +426,43 @@ private JFrame frame;
             System.exit(0);
         }
     }//GEN-LAST:event_btnExitActionPerformed
+
+    //Empty the input fields and Refresh the table
+    private void mnuRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRefreshActionPerformed
+       txtEquipID.setText("");
+        txtEquipTitle.setText("");
+        txtNumAvailable.setText("");
+        txtTotalStock.setText("");
+        txtVendorID.setText("");
+        
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM Inventory");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_mnuRefreshActionPerformed
+
+    //Exit the program
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        // TODO add your handling code here:
+        
+        frame = new JFrame("Exit");
+        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "Equipment Search",
+                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_mnuExitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -457,10 +514,14 @@ private JFrame frame;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel_Dashboard_Logo;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JMenuItem mnuRefresh;
     private javax.swing.JTextField txtEquipID;
     private javax.swing.JTextField txtEquipTitle;
     private javax.swing.JTextField txtNumAvailable;
