@@ -22,6 +22,12 @@ import javax.swing.JFrame;
 public class main { 
     public static void main(String[] args) throws SQLException {
         //DBConnect db = new DBConnect();
+        
+        // Comment this out to stop the login auto launch
+        System_Forms.Login_Form login = new System_Forms.Login_Form();
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        login.setVisible(true);
+        
         byte choice;
         do{
             //Testing console UI
