@@ -24,6 +24,11 @@ public class main {
         //DBConnect db = new DBConnect();
         byte choice;
         do{
+            // Laucnhes the GUI application
+            System_Forms.Login_Form login = new System_Forms.Login_Form();
+            login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            login.setVisible(true);
+            
             //Testing console UI
             System.out.println("Equipment Checkout System");
             System.out.println("*".repeat(25) );
