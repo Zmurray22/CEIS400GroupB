@@ -38,6 +38,10 @@ public class Account {
         }
         //Create table
         db.SqlCreateFromTemplate("account_temp", tableName);
+        if (checkExists(tableName)){
+            System.out.println("Account created");
+            return;
+        } 
         db.Dispose();
     }
     
@@ -47,6 +51,8 @@ public class Account {
         //Pull the first and last name of the user from username
         String tableName = userProfile(username);
         //drop table
+        
+        db.Dispose();
     }
 
     public static ResultSet search(String tableName) {
@@ -54,16 +60,20 @@ public class Account {
         
         DBConnect db = new DBConnect();
         ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
+        
+        db.Dispose();
         return rs;
     }
     
     public static void update(String equip_id, String qty) throws ParseException{
         //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
-        
+        DBConnect db = new DBConnect();
         String string = "January 2, 2010";
         Date date = (Date) new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
-    //aggregate changes and update through db.sqlUpdate()
-    //In Construction!!
+        //aggregate changes and update through db.sqlUpdate()
+        //In Construction!!
+    
+        db.Dispose();
     }
     
     public static String userProfile(String username) throws SQLException{
@@ -84,6 +94,7 @@ public class Account {
                 "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
                 profileArr[4] + "\nUsername: " + profileArr[5]);
         //return first and last name
+        db.Dispose();
         return profileArr[1] + "_" + profileArr[2];
     }
     
