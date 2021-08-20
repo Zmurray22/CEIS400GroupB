@@ -30,8 +30,9 @@ public class Account {
         DBConnect db = new DBConnect();
         //Pull the first and last name of user from username and
         //Search for existing user account table
-        db.SqlSelectSingle(userProfile(username));
+        String tableName = userProfile(username);
         
+        DBConnect.SqlCreateFromTemplate("account_temp", tableName);
         db.Dispose();
         //if exist do nothing
     }

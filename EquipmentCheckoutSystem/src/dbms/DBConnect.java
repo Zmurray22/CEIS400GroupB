@@ -136,6 +136,9 @@ public class DBConnect
         }
         return val;
     }
+    public void SqlCreateFromTemplate(String templateName, String newTableName){
+
+    } 
     public Boolean DBReadyForUse() {
         if (Conn != null)
             return true;
