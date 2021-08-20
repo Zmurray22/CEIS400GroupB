@@ -29,12 +29,16 @@ public class Account {
         //Create an account table for a given user if it does not already exist
         DBConnect db = new DBConnect();
         //Pull the first and last name of user from username and
-        //Search for existing user account table
         String tableName = userProfile(username);
-        
-        DBConnect.SqlCreateFromTemplate("account_temp", tableName);
+        //Search for existing user account table
+        //Return if already exists
+        if (checkExists(tableName)){
+            System.out.println("Account already exists");
+            return;
+        }
+        //Create table
+        db.SqlCreateFromTemplate("account_temp", tableName);
         db.Dispose();
-        //if exist do nothing
     }
     
     public static void deleteAcc(String username){
