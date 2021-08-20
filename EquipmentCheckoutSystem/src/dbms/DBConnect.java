@@ -137,7 +137,16 @@ public class DBConnect
         return val;
     }
     public void SqlCreateFromTemplate(String templateName, String newTableName){
-
+            String query = "CREATE TABLE '" + newTableName + "' LIKE '" + templateName + "'";
+        try{
+            Statement sqlStmt = Conn.createStatement();
+            sqlStmt.executeQuery(Clean(query));
+        }
+        catch (Exception err){
+            err.printStackTrace();
+            System.out.println("An error occured when executing the query '" + query + "'.\nPlease review the error below for the cause of the exception." +
+                               "\nError: " + err.getMessage());
+        }
     } 
     public Boolean DBReadyForUse() {
         if (Conn != null)
