@@ -16,6 +16,7 @@ public class Account {
     }
     
     public static boolean checkExists(String table){
+        //Verify if a given table exists
         DBConnect db = new DBConnect();
         String query = "SHOW TABLES LIKE '" + table + "'";
         
@@ -25,6 +26,7 @@ public class Account {
     }
     
     public static void createAcc(String table){
+        //Create an account table for a given user if it does not already exist
         //Search for existing user account table
         
         DBConnect db = new DBConnect();
@@ -34,12 +36,16 @@ public class Account {
     }
 
     public static ResultSet search(String tableName) {
+        //Find a table
+        
         DBConnect db = new DBConnect();
         ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
         return rs;
     }
     
     public static void update(String equip_id, String qty) throws ParseException{
+        //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
+        
         String string = "January 2, 2010";
         Date date = (Date) new SimpleDateFormat("MMMM d, yyyy", Locale.ENGLISH).parse(string);
     //aggregate changes and update through db.sqlUpdate()
@@ -47,8 +53,9 @@ public class Account {
     }
     
     public static String userProfile(String username) throws SQLException{
-        DBConnect db = new DBConnect();
         //Pull employee profile record from the database with username entered earlier
+        
+        DBConnect db = new DBConnect();
         //Create array to hold the fields
         ResultSet rs = EmployeeDB.search(username);
         String[] profileArr = new String[6];
@@ -62,12 +69,12 @@ public class Account {
         System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
                 "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
                 profileArr[4] + "\nUsername: " + profileArr[5]);
-        
+        //return first and last name
         return profileArr[1] + "_" + profileArr[2];
     }
     
     public static void showAccount(String username) throws SQLException{
-         //Check for account table under user's name
+         //Check for account table under user's name and print
         DBConnect db = new DBConnect();
         
         String tableName = Account.userProfile(username);
