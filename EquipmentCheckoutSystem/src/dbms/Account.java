@@ -41,9 +41,10 @@ public class Account {
         db.Dispose();
     }
     
-    public static void deleteAcc(String username){
+    public static void deleteAcc(String username) throws SQLException{
         //Delete user Account table
         DBConnect db = new DBConnect();
+        String tableName = userProfile(username);
         //Pull the first and last name of the user from username
     }
 
