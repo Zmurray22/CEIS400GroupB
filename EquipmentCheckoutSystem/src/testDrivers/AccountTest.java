@@ -8,27 +8,43 @@ import java.text.ParseException;
 
 public class AccountTest {
     public static void main(String[] args) throws ParseException, SQLException{
-        String table = "";
-        String username = "";
-        String equip_id = "";
-        String qty = "";
+        String table = "zach_murray";
+        String username = "zmurray22";
+        String equip_id = "11";
+        String qty = "2";
+        
+        String table2 = "rich_farley";
+        String username2 = "richf";
+        String equip_id2 = "15";
+        String qty2 = "2";
         
         //Verify checking if account table exists
-        if (Account.checkExists("zach_murray")){
-            System.out.println("Table zach_murray exists");
-        }
-        if (Account.checkExists("rich_farley")){
-            System.out.println("Table rich_farley exists");
+        if (Account.checkExists("table")){
+            System.out.println("Table " + table + " exists");
         }
         else{
-            System.out.println("Table rich_farley does not exist");
+            System.out.println("Table " + table + " does not exist");
+        }
+        if (Account.checkExists(table2)){
+            System.out.println("Table " + table2 + " exists");
+        }
+        else{
+            System.out.println("Table " + table2 + " does not exist");
         }
         
         //Verify if account exists, or create one
         Account.createAcc(table);
+        
+        //Verify if table can be found
         Account.search(table);
+        
+        //Verify if existing account can be displayed
         Account.showAccount(username);
+        
+        //Verify if account table can be updated
         Account.update(equip_id, qty);
+        
+        //Verify if userProfile can be displayed
         Account.userProfile(username);
     }
 }
