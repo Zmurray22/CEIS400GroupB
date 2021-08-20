@@ -25,14 +25,21 @@ public class Account {
         return !"0".equals(exists);       
     }
     
-    public static void createAcc(String table){
+    public static void createAcc(String username) throws SQLException{
         //Create an account table for a given user if it does not already exist
-        //Search for existing user account table
-        
         DBConnect db = new DBConnect();
-        db.SqlSelectSingle(table);
+        //Pull the first and last name of user from username and
+        //Search for existing user account table
+        db.SqlSelectSingle(userProfile(username));
+        
         db.Dispose();
         //if exist do nothing
+    }
+    
+    public static void deleteAcc(String username){
+        //Delete user Account table
+        DBConnect db = new DBConnect();
+        //Pull the first and last name of the user from username
     }
 
     public static ResultSet search(String tableName) {
