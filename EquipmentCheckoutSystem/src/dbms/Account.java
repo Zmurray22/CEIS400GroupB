@@ -105,7 +105,7 @@ public class Account {
         db.SqlInsert("equipment_hist", "hist_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
         
         //Update emp_equipment
-        db.SqlUpdate("emp_equipment", "fname = 'Jon'", "emlp_id = '0002'");
+        //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
         //If new qty equals 0 then drop record
         ///working issue- can't insert if exists, but can't update if doesn't exist.
         db.Dispose();
