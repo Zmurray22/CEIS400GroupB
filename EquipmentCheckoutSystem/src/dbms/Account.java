@@ -60,7 +60,7 @@ public class Account {
         db.Dispose();
     }
 
-    public static ResultSet search(String tableName) {
+    private static ResultSet search(String tableName) {
         //Find a table
         
         DBConnect db = new DBConnect();
@@ -145,7 +145,10 @@ public class Account {
                 System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
                 " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
             }
-        }          
+        }
+        else{
+            System.out.println("Account does not exist");
+        }
         db.Dispose();
     }
     
