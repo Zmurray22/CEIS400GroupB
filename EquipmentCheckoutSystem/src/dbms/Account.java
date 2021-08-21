@@ -91,6 +91,7 @@ public class Account {
                 String record = rs.getString(i);
                 equipArr[i-1] = record;
             }
+        }
         String title = equipArr[1];
         String newInvQty = Integer.parseInt(equipArr[2]) + qty;
 
