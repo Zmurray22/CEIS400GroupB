@@ -80,7 +80,17 @@ public class Account {
         String profileArr[] = userProfile(username);
         //Set account tablename
         String tableName = profileArr[1] + "_" + profileArr[2];
-        String title = "";
+        
+        //Get equipment elements
+        //Inventory: equip_id, title, available, total, vendor
+        ResultSet rs = InventoryDB.search(equip_id);
+        String[] equipArr = new String[5];
+        while(rs.next()){
+            for (int i = 1; i < 6; i++){
+                String record = rs.getString(i);
+                equipArr[i-1] = record;
+            }
+        String title = equipArr[1];
 
         //Update user account
         db.SqlInsert(tableName, "equip_id, title, qty, date", "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
