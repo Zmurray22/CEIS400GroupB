@@ -27,8 +27,11 @@ public class Account {
     public static void createAcc(String username) throws SQLException{
         //Create an account table for a given user if it does not already exist
         DBConnect db = new DBConnect();
-        //Pull the first and last name of user from username and
-        String tableName = userProfile(username);
+     
+         //Get profile elements
+        String profileArr[] = userProfile(username);
+        //Set account tablename
+        String tableName = profileArr[1] + "_" + profileArr[2];
         //Search for existing user account table
         //Return if already exists
         if (checkExists(tableName)){
@@ -48,8 +51,11 @@ public class Account {
         //Delete user Account table
         DBConnect db = new DBConnect();
         //Pull the first and last name of the user from username
-        String tableName = userProfile(username);
-        //drop table
+         //Get profile elements
+        String profileArr[] = userProfile(username);
+        //Set account tablename
+        String tableName = profileArr[1] + "_" + profileArr[2];
+        ///drop table
         
         db.Dispose();
     }
@@ -64,17 +70,20 @@ public class Account {
         return rs;
     }
     
-    public static void update(String userName, String equip_id, String qty) throws ParseException, SQLException{
+    public static void update(String username, String equip_id, String qty) throws ParseException, SQLException{
         //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
         DBConnect db = new DBConnect();
         //Store the time of transaction     
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        String tableName = userProfile(userName);
-        
+        //Get profile elements
+        String profileArr[] = userProfile(username);
+        //Set account tablename
+        String tableName = profileArr[1] + "_" + profileArr[2];
+        String title = "";
 
         //Update user account
-        db.SqlInsert(tableName, "equip_id, title, qty, date", "'0001', 'John', 'Doe', '1', '123-456-7890', 'jdoe', 'MySuperSecretPwd'");
+        db.SqlInsert(tableName, "equip_id, title, qty, date", "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
         
         
         //Update Inventory available
@@ -103,11 +112,8 @@ public class Account {
                 profileArr[i-1] = record;
             }
         }
-        //Print the profile data
-        System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
-                "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
-                profileArr[4] + "\nUsername: " + profileArr[5]);
-        //return first and last name
+
+        //return array of profile elements
         db.Dispose();
         return profileArr;
     }
