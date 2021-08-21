@@ -77,6 +77,7 @@ public class Account {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
         //Get profile elements
+        //employee: empl_id, fname, lname, access, phone, username, password
         String profileArr[] = userProfile(username);
         //Set account tablename
         String tableName = profileArr[1] + "_" + profileArr[2];
@@ -91,21 +92,22 @@ public class Account {
                 equipArr[i-1] = record;
             }
         String title = equipArr[1];
+        String newInvQty = Integer.parseInt(equipArr[2]) + qty;
 
-        //Update user account
+        //Insert user account record
         db.SqlInsert(tableName, "equip_id, title, qty, date", "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
         
-        
         //Update Inventory available
-        db.SqlUpdate("employee", "fname = 'Jon'", "emlp_id = '0002'");
+        db.SqlUpdate("inventory", "available = '" + newInvQty + "'", "equip_id = '" + equip_id + "'");
         
         //Update equipment_hist
         String hist_id = GetNewID();
-        db.SqlInsert("equipment_hist", hist_id + "empl_id, fname, lname, access, phone, username, password", "'0001', 'John', 'Doe', '1', '123-456-7890', 'jdoe', 'MySuperSecretPwd'");
+        db.SqlInsert("equipment_hist", "hist_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
         
         //Update emp_equipment
-        db.SqlUpdate("employee", "fname = 'Jon'", "emlp_id = '0002'");
-        
+        db.SqlUpdate("emp_equipment", "fname = 'Jon'", "emlp_id = '0002'");
+        //If new qty equals 0 then drop record
+        ///working issue- can't insert if exists, but can't update if doesn't exist.
         db.Dispose();
     }
     
