@@ -32,8 +32,11 @@ public class AccountTest {
             System.out.println("Table " + table2 + " does not exist");
         }
         
+        
         //Verify if account exists, or create one
-        Account.createAcc(table);
+        Account.createAcc(table);       
+        Account.createAcc(table2);
+        
         
         //Verify if table can be found
         Account.search(table);
@@ -42,7 +45,7 @@ public class AccountTest {
         Account.showAccount(username);
         
         //Verify if account table can be updated
-        Account.update(equip_id, qty);
+        Account.update(username, equip_id, qty);
         
         //Verify if userProfile can be displayed
         Account.userProfile(username);
