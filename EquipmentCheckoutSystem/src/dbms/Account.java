@@ -84,7 +84,7 @@ public class Account {
         
         //Get equipment elements
         //Inventory: equip_id, title, available, total, vendor
-        ResultSet rs = InventoryDB.search(equip_id);
+        ResultSet rs = InventoryDB.search(equip_id, db);
         String[] equipArr = new String[5];
         while(rs.next()){
             for (int i = 1; i < 6; i++){

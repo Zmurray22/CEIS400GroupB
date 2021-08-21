@@ -30,9 +30,8 @@ public class InventoryDB {
         System.out.println("Inventory Item removed successfully!");
     }
 
-    public static ResultSet search(String filter)
+    public static ResultSet search(String filter, DBConnect db)
     {
-        DBConnect db = new DBConnect();
         ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id LIKE '%" + filter + "%'");
         db.Dispose();
         return rs;
