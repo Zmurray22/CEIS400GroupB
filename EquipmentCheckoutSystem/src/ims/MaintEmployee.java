@@ -5,6 +5,9 @@ public class MaintEmployee {
     private String lname;
     private String id;
     private String password;
+    
+    public static void main(String[] args) {
+    }
 
     public String getFname() {
         return fname;
