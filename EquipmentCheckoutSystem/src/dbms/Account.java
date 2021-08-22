@@ -17,10 +17,16 @@ public class Account {
     public static boolean checkExists(String table){
         //Verify if a given table exists
         DBConnect db = new DBConnect();
-        String query = "SHOW TABLES LIKE '" + table + "'";
+        String exists = "0";
         
-        String exists = db.SqlSelectSingle(query);
+        String query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = '" + table + "'";
+        
+        exists = db.SqlSelectSingle(query);
+        
         db.Dispose();
+        if (exists == "1")
+            return true;
+        
         return !"0".equals(exists);       
     }
     
@@ -58,16 +64,6 @@ public class Account {
         ///drop table
         
         db.Dispose();
-    }
-
-    private static ResultSet search(String tableName) {
-        //Find a table
-        
-        DBConnect db = new DBConnect();
-        ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
-        
-        db.Dispose();
-        return rs;
     }
     
     public static void update(String username, String equip_id, String qty) throws ParseException, SQLException{
@@ -138,16 +134,15 @@ public class Account {
         String[] profile = Account.userProfile(username);
         String tableName = profile[1] + "_" + profile[2];
         if (Account.checkExists(tableName)){
-            System.out.println("Account exists");
-            ResultSet rs = Account.search(tableName);
-            String[] accountArr = new String[4];
+            System.out.println("Account " + tableName + " exists");
+            ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
             while(rs.next()){
                 System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
                 " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
             }
         }
         else{
-            System.out.println("Account does not exist");
+            System.out.println("Account " + tableName + " does not exist");
         }
         db.Dispose();
     }

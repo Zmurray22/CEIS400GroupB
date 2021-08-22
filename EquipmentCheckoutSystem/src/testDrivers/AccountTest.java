@@ -8,7 +8,7 @@ import java.text.ParseException;
 
 public class AccountTest {
     public static void main(String[] args) throws ParseException, SQLException{
-        String table = "zach_murray";
+        String table = "Zach_Murray";
         String username = "zmurray22";
         String equip_id = "11";
         String qty = "2";
@@ -37,12 +37,23 @@ public class AccountTest {
         Account.showAccount(username2);
         
         //Verify if account table can be updated
-        Account.update(username, equip_id, qty);
-        Account.update(username, equip_id, qty);
+        //Account.update(username, equip_id, qty);
+        //Account.update(username, equip_id, qty);
         
         //Verify if userProfile can be displayed
-        Account.userProfile(username);
-        Account.userProfile(username);
+        String profileArr[] = Account.userProfile(username);
+                    
+                    //Print the profile data
+                    System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
+                     "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
+                    profileArr[4] + "\nUsername: " + profileArr[5]);
+        
+        String profileArr2[] = Account.userProfile(username2);
+                    
+                    //Print the profile data
+                    System.out.println("Employee ID: " + profileArr2[0] + "\nFirst Name: " + profileArr2[1] + 
+                     "\nLast Name: " + profileArr2[2] + "\nAccess Level: " + profileArr2[3] + "\nPhone: " + 
+                    profileArr2[4] + "\nUsername: " + profileArr2[5]);
         
         //Verify if account exists, or create one
         Account.createAcc(username);       
