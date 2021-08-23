@@ -19,7 +19,7 @@ public class Account {
         DBConnect db = new DBConnect();
         String exists = "0";
         
-        String query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = '" + table + "'";
+        String query = "SELECT COUNT(*) FROM information_schema.tables WHERE table_schema = DATABASE() AND table_name = '" + table.toLowerCase() + "'";
         
         exists = db.SqlSelectSingle(query);
         
