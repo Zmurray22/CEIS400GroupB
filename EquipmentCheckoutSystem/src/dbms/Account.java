@@ -115,7 +115,7 @@ public class Account {
         String newInvQty = Integer.parseInt(equipArr[2]) + qty;
 
         //Insert user account record
-        createAcc(tableName);
+        
         db.SqlInsert(tableName, "equip_id, title, qty, date", "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
         
         //Update Inventory available
