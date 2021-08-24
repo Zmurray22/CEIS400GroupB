@@ -347,6 +347,23 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     private void btnInventorySearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventorySearchActionPerformed
         // TODO add your handling code here: 
         
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM Inventory");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
         //Grab the Equipment ID that will be used for searching the database
         String EquipmentID = txtEquipID.getText();
         
@@ -363,9 +380,11 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             txtVendorID.setText("");
             txtEquipID.requestFocus();
         }
+        else
+        {
         //Display the information in the chart, based on the Equip ID that was given
         //Connect to the DB
-        DBConnect db = new DBConnect();
+        
         //Use the search function implemented in the InventoryDB file
         try{
         ResultSet rs = InventoryDB.search(EquipmentID, db);
@@ -381,6 +400,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
         }
         db.Dispose(); //Closing the connection to the Database
+        }
         
     }//GEN-LAST:event_btnInventorySearchActionPerformed
 

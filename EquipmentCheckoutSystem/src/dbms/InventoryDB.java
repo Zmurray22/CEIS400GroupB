@@ -18,7 +18,7 @@ public class InventoryDB {
             
             db.SqlInsert("Inventory", "equip_id, title, available, total, vendor_id", "'" + newID + 
                     "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '"+ "00" + vendorID + "'");
-            db.Dispose(); // Remember to run this to ensure that the database connection is closed
+            db.Dispose();
             System.out.println( " has been put into the database.");  
     }
 
@@ -32,8 +32,7 @@ public class InventoryDB {
 
     public static ResultSet search(String filter, DBConnect db)
     {
-        ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id LIKE '%" + filter + "%'");
-        db.Dispose();
+        ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id =" + filter + "");
         return rs;
     }
    
