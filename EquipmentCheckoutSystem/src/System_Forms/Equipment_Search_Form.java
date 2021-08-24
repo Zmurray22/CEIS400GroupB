@@ -15,6 +15,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFrame;
+import dbms.EmployeeDB;
 
 /**
  *
@@ -417,11 +418,12 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
             DBConnect db = new DBConnect();
         try{
         ResultSet rs = InventoryDB.search(equipID, db);
-        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
-        model.setRowCount(0); //This is essential to clear the table prior to searching
+        
         while(rs.next())
         {
-        model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString("total"), rs.getString("vendor_id")});
+        ArrListObj.add(rs.getString(1));
+        order = ArrListObj.toArray(order);
+        JOptionPane.showMessageDialog(this, rs.getString(2) + " has been placed in the Cart. When finished, select Order and your Cart will be displayed.");
         }
         rs.close();
         
@@ -431,11 +433,18 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         }
         db.Dispose(); //Closing the connection to the Database
         }
+        else
+        {
+        JOptionPane.showMessageDialog(this, "Error. Provide an Equipment ID to search up.",
+"Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnAddToCartActionPerformed
 
     //Delete the searched entry from the database **EQUIPMANAGER ONLY**
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
+        
+        //ensure that the person logged in has the credentials to utilize this button
         
         String equipID = txtEquipID.getText();
         DBConnect db = new DBConnect();
@@ -550,7 +559,8 @@ private JFrame frame;
         JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
 "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+        else
+        {
         //use the ArrayList to locate each Equipment associated with that ID
         String rs = "";
         DBConnect db = new DBConnect();
@@ -560,8 +570,12 @@ private JFrame frame;
              ArrListItems.add(rs);
              Items = ArrListItems.toArray(Items);
         }       
-        JOptionPane.showMessageDialog(this, Items);
-        
+        if(JOptionPane.showConfirmDialog(frame, Items, "Confirm your Cart Selections.",
+                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+           {
+               JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
+           }
+        }
     }//GEN-LAST:event_btnOrderActionPerformed
 
     //Empty the input fields and Refresh the table
