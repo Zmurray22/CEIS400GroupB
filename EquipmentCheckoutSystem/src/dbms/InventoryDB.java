@@ -5,12 +5,9 @@ package dbms;
 import java.sql.ResultSet;
 
 public class InventoryDB {
-
-    public InventoryDB()
-    {
-
-    }
-
+    
+    public static void InventoryDB(){
+}
     
     public static void add (String equipTitle, String numAvailable, String totalStock, String vendorID)
     {
@@ -20,7 +17,7 @@ public class InventoryDB {
             DBConnect db = new DBConnect();
             
             db.SqlInsert("Inventory", "equip_id, title, available, total, vendor_id", "'" + newID + 
-                    "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '" + vendorID + "'");
+                    "', '" + equipTitle + "', '" + numAvailable + "', '" + totalStock + "', '"+ "00" + vendorID + "'");
             db.Dispose(); // Remember to run this to ensure that the database connection is closed
             System.out.println( " has been put into the database.");  
     }
@@ -36,6 +33,7 @@ public class InventoryDB {
     public static ResultSet search(String filter, DBConnect db)
     {
         ResultSet rs = db.SqlSelectAll("SELECT * FROM inventory WHERE equip_id LIKE '%" + filter + "%'");
+        db.Dispose();
         return rs;
     }
    

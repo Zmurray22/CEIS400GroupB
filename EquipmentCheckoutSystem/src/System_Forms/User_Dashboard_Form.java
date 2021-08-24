@@ -7,6 +7,8 @@ package System_Forms;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,10 +54,14 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_Dashboard_Logo = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnUserProfile = new javax.swing.JButton();
+        btnCurrentRentals = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btnRentalHistory = new javax.swing.JButton();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -96,21 +102,41 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jButton1.setText("User Profile");
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jButton1.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnUserProfile.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnUserProfile.setText("User Profile");
+        btnUserProfile.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnUserProfile.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnUserProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserProfileActionPerformed(evt);
+            }
+        });
 
-        jButton2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jButton2.setText("Create Equipment Request");
+        btnCurrentRentals.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnCurrentRentals.setText("Current Rentals");
+        btnCurrentRentals.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCurrentRentalsActionPerformed(evt);
+            }
+        });
 
         jButton3.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jButton3.setText("Equipment Search");
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jButton3.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jButton4.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jButton4.setText("Request Status");
+        btnRentalHistory.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnRentalHistory.setText("Rental History");
+        btnRentalHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRentalHistoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,12 +146,12 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCurrentRentals, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(btnUserProfile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(147, 147, 147)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 269, Short.MAX_VALUE)
+                    .addComponent(btnRentalHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(193, 193, 193))
         );
         jPanel1Layout.setVerticalGroup(
@@ -133,15 +159,37 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(85, 85, 85)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnUserProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnRentalHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCurrentRentals, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
+
+        jMenu1.setText("File");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu1ActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("Exit");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -156,6 +204,54 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnUserProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserProfileActionPerformed
+        // TODO add your handling code here:
+        User_Profile up = new User_Profile();
+        up.show();
+        
+        dispose();
+    }//GEN-LAST:event_btnUserProfileActionPerformed
+
+private JFrame frame;
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        frame = new JFrame("Exit");
+        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "User Dashboard",
+                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        Equipment_Search_Form es = new Equipment_Search_Form();
+        es.show();
+        
+        dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenu1ActionPerformed
+
+    private void btnCurrentRentalsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCurrentRentalsActionPerformed
+        // TODO add your handling code here:
+        Current_Rentals_Form cr = new Current_Rentals_Form();
+        cr.show();
+        
+        dispose();
+    }//GEN-LAST:event_btnCurrentRentalsActionPerformed
+
+    private void btnRentalHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRentalHistoryActionPerformed
+        // TODO add your handling code here:
+        Rental_History_Form rh = new Rental_History_Form();
+        rh.show();
+        
+        dispose();
+    }//GEN-LAST:event_btnRentalHistoryActionPerformed
 
     /**
      * @param args the command line arguments
@@ -194,11 +290,15 @@ public class User_Dashboard_Form extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnCurrentRentals;
+    private javax.swing.JButton btnRentalHistory;
+    private javax.swing.JButton btnUserProfile;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel_Dashboard_Logo;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

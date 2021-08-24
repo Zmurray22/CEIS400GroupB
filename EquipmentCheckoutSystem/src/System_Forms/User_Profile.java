@@ -5,6 +5,11 @@
  */
 package System_Forms;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Zach
@@ -15,8 +20,9 @@ public class User_Profile extends javax.swing.JFrame {
      * Creates new form User_Profile
      */
     public User_Profile() {
-        initComponents();
+        initComponents();;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,21 +33,192 @@ public class User_Profile extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabelFirstName = new javax.swing.JLabel();
+        jLabelLastName = new javax.swing.JLabel();
+        jLabelUserID = new javax.swing.JLabel();
+        jLabelCheckedOut = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        EquipTable = new javax.swing.JTable();
+        btnReturnItems = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txtFirstName = new javax.swing.JTextPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        txtLastName = new javax.swing.JTextPane();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        txtUserID = new javax.swing.JTextPane();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        mnuDashboard = new javax.swing.JMenuItem();
+        mnuExit = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel2.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabel2.setText("User Profile");
+
+        jLabelFirstName.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelFirstName.setText("First Name:");
+
+        jLabelLastName.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelLastName.setText("Last Name:");
+
+        jLabelUserID.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelUserID.setText("User ID:");
+
+        jLabelCheckedOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        jLabelCheckedOut.setText("Checked Out Items");
+
+        EquipTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipment ID", "Equipment Title", "Number Available", "Total in Stock", "Vendor ID"
+            }
+        ));
+        jScrollPane1.setViewportView(EquipTable);
+
+        btnReturnItems.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnReturnItems.setText("Return Items");
+        btnReturnItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReturnItemsActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(txtFirstName);
+
+        jScrollPane3.setViewportView(txtLastName);
+
+        jScrollPane4.setViewportView(txtUserID);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(214, 214, 214)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 685, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jLabelLastName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelFirstName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabelUserID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jScrollPane2)
+                                    .addComponent(jScrollPane3)
+                                    .addComponent(jScrollPane4)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(273, 273, 273)
+                        .addComponent(jLabelCheckedOut))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(283, 283, 283)
+                        .addComponent(btnReturnItems, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jLabelFirstName, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabelLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelUserID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jLabelCheckedOut, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnReturnItems, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jMenu1.setText("File");
+
+        mnuDashboard.setText("Dashboard");
+        mnuDashboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuDashboardActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuDashboard);
+
+        mnuExit.setText("Exit");
+        mnuExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuExitActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnuExit);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+private JFrame frame;
+    
+    private void mnuExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuExitActionPerformed
+        // TODO add your handling code here:
+        frame = new JFrame("Exit");
+        if (JOptionPane.showConfirmDialog(frame, "Confirm if you want to exit", "User Profile",
+                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+        {
+            System.exit(0);
+        }
+    }//GEN-LAST:event_mnuExitActionPerformed
+
+    private void mnuDashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuDashboardActionPerformed
+        // TODO add your handling code here:
+        User_Dashboard_Form ud = new User_Dashboard_Form();
+        ud.show();
+        
+        dispose();
+    }//GEN-LAST:event_mnuDashboardActionPerformed
+
+    private void btnReturnItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemsActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnReturnItemsActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +256,25 @@ public class User_Profile extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable EquipTable;
+    private javax.swing.JButton btnReturnItems;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabelCheckedOut;
+    private javax.swing.JLabel jLabelFirstName;
+    private javax.swing.JLabel jLabelLastName;
+    private javax.swing.JLabel jLabelUserID;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JMenuItem mnuDashboard;
+    private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JTextPane txtFirstName;
+    private javax.swing.JTextPane txtLastName;
+    private javax.swing.JTextPane txtUserID;
     // End of variables declaration//GEN-END:variables
 }

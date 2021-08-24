@@ -1,16 +1,33 @@
 package ims;
 
 import System_Forms.Login_Form;
+import com.sun.jdi.connect.spi.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.DatabaseMetaData;
 import dbms.DBConnect;
 import dbms.InventoryDB;
+import dbms.EmployeeDB;
+import dbms.VendorDB;
+import dbms.Account;
+import dbms.EquipmentRequest;
+import ims.EquipmentManager;
+import ims.MaintEmployee;
+import java.sql.SQLException;
 import java.util.Scanner;
 import javax.swing.JFrame;
 //testing for push and pull from github desktop
 
 //test for Zach
 public class main { 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         //DBConnect db = new DBConnect();
+        
+        // Comment this out to stop the login auto launch
+        System_Forms.Login_Form login = new System_Forms.Login_Form();
+        login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        login.setVisible(true);
+        
         byte choice;
         do{
             //Testing console UI
@@ -95,14 +112,14 @@ public class main {
         form.setVisible(true);
     }
 
-    public static void logIn(){
+    public static void logIn() throws SQLException{
         Scanner selection = new Scanner(System.in);
         System.out.println("Username:");
-        String name = selection.nextLine();
+        String username = selection.nextLine();
         
         System.out.println("Password:");
         String pswd = selection.nextLine();
-        Boolean log = dbms.EmployeeDB.authenticate(name, pswd);
+        Boolean log = dbms.EmployeeDB.authenticate(username, pswd);
         //Use EmplyeeDB to check credentials and if true forward to normal user menu
         byte answer = 0;
         
@@ -123,11 +140,17 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-
+                    
+                    String profileArr[] = Account.userProfile(username);
+                    
+                    //Print the profile data
+                    System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
+                     "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
+                    profileArr[4] + "\nUsername: " + profileArr[5]);
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));
-
+                    Account.showAccount(username);
                     break;
                 case 3:
                     System.out.println("Checkout Equipment\n" + "*".repeat(18));
@@ -143,13 +166,7 @@ public class main {
             }
         }while(answer != 0);    
     }
-    
-    public static void employeeMenu(){
-        //Pull employee record from the database with username entered earlier
-        //List employee profile data
-        //Check for account table under user's name
-        //Pull Account data and list
-    }
+
     
     /*public static void checkOut(){
         Scanner selection = new Scanner(System.in);

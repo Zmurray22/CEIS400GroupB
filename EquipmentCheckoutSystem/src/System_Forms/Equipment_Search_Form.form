@@ -17,6 +17,14 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuRefreshActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem1">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Dashboard"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jMenuItem1ActionPerformed"/>
+              </Events>
+            </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="mnuExit">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Exit"/>
@@ -126,10 +134,12 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="btnAddToCart" max="32767" attributes="0"/>
+                          <Component id="btnOrder" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -148,19 +158,11 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="btnInventorySearch" min="-2" pref="104" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnUpdate" min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="btnDelete" min="-2" pref="104" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="btnReset" min="-2" pref="104" max="-2" attributes="0"/>
-                              <EmptySpace pref="26" max="32767" attributes="0"/>
-                              <Component id="btnExit" min="-2" pref="106" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnAdd" min="-2" pref="104" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="btnDelete" min="-2" pref="106" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="btnAdd" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -197,20 +199,16 @@
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnInventorySearch" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnUpdate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="btnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnAdd" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnInventorySearch" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnReset" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnExit" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnAdd" min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnOrder" min="-2" pref="37" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnAddToCart" min="-2" pref="44" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -324,6 +322,17 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnInventorySearchActionPerformed"/>
               </Events>
             </Component>
+            <Component class="javax.swing.JButton" name="btnAddToCart">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="SansSerif" size="18" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="Add to Cart"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddToCartActionPerformed"/>
+              </Events>
+            </Component>
             <Component class="javax.swing.JButton" name="btnDelete">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -335,48 +344,26 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnUpdate">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="18" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Update"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
-              </Events>
-            </Component>
             <Component class="javax.swing.JButton" name="btnAdd">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Add"/>
+                <Property name="text" type="java.lang.String" value="Add to Database"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnReset">
+            <Component class="javax.swing.JButton" name="btnOrder">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="SansSerif" size="18" style="1"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Reset"/>
+                <Property name="text" type="java.lang.String" value="Order"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnResetActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnExit">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="SansSerif" size="18" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Exit"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOrderActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

@@ -4,7 +4,12 @@ import java.sql.*;
 
 public class DBConnect
 {
+
     private Connection Conn; // This will be our class variable to store the database connection
+    
+    public Connection getConn() {
+        return Conn;
+    }
     
     public DBConnect() {
         //try to connect to the database
@@ -25,7 +30,7 @@ public class DBConnect
                 Conn = DriverManager.getConnection(url, username, password);
                 
                 //statement
-                System.out.println("Connection Successful!");
+                //System.out.println("Connection Successful!");
                 int count = 0;
                 /*ResultSet result = SqlSelectAll("SELECT * FROM employee"); // Use our class method to run the query for us.
                 //if you want to run the console without the employee database showing up, comment out the result set function to the result.close, and prior to the catch SQLExecution ex
@@ -136,6 +141,18 @@ public class DBConnect
         }
         return val;
     }
+    public void SqlCreateFromTemplate(String templateName, String newTableName){
+            String query = "CREATE TABLE '" + newTableName + "' LIKE '" + templateName + "'";
+        try{
+            Statement sqlStmt = Conn.createStatement();
+            sqlStmt.executeQuery(Clean(query));
+        }
+        catch (Exception err){
+            err.printStackTrace();
+            System.out.println("An error occured when executing the query '" + query + "'.\nPlease review the error below for the cause of the exception." +
+                               "\nError: " + err.getMessage());
+        }
+    } 
     public Boolean DBReadyForUse() {
         if (Conn != null)
             return true;
