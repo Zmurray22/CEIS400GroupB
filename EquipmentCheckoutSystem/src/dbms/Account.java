@@ -115,15 +115,15 @@ public class Account {
         String newInvQty = Integer.parseInt(equipArr[2]) + qty;
 
         //Insert user account record
-        
-        db.SqlInsert(tableName, "equip_id, title, qty, date", "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
+        String transactionID = GetNewID(tableName);
+        db.SqlInsert(tableName, "transaction_id, equip_id, title, qty, date", "'" + transactionID + "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
         
         //Update Inventory available
         db.SqlUpdate("inventory", "available = '" + newInvQty + "'", "equip_id = '" + equip_id + "'");
         
         //Update equipment_hist
-        String hist_id = GetNewID();
-        db.SqlInsert("equipment_hist", "hist_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
+        String hist_id = GetNewID("equipment_hist");
+        db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
         
         //Update emp_equipment
         //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
@@ -152,13 +152,13 @@ public class Account {
     }
     
      // This method will auto increment the current equipment_hist hist_id 
-    private static String GetNewID() {
+    private static String GetNewID(String tableName) {
         DBConnect db = new DBConnect(); // Create a database connection
-        String id = db.SqlSelectSingle("SELECT hist_id FROM equipment_hist ORDER BY hist_id DESC LIMIT 1"); // First try to get the top ID.
+        String id = db.SqlSelectSingle("SELECT transaction_id FROM " + tableName + " ORDER BY hist_id DESC LIMIT 1"); // First try to get the top ID.
         if (id.equals("")) // This is incase there are no registered vendors in the software
-            id = "0001";
+            id = "1";
         else
-            id = String.format("%04d", Integer.parseInt(id) + 1); // This will increment the top ID by one then format it to have three digits        
+            id = String.format("%o", Integer.parseInt(id) + 1); // This will increment the top ID by one     
         db.Dispose(); // This will close our database connection for us
         return id;
     }
