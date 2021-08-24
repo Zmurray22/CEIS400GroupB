@@ -162,7 +162,7 @@ public class DBConnect
     }
     
     // Below are the private methods to the class that will be used to validate the user's input
-    private String Clean(String original) {
+    public static String Clean(String original) {
         return original.replace(";", ""); // Note: we use String.replace(String, String) instead of chars because an error is thrown when replacing a char with a blank.
     }
 }

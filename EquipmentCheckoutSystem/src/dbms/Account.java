@@ -89,48 +89,64 @@ public class Account {
         db.Dispose();
     }
     
-    public static void update(String username, String equip_id, String qty) throws ParseException, SQLException{
+    public static void update(String username, Integer [] order) throws ParseException, SQLException{
         //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
         DBConnect db = new DBConnect();
         //Store the time of transaction     
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
         
-        
-        //Get equipment elements
-        //Inventory: equip_id, title, available, total, vendor
-        ResultSet rs = InventoryDB.search(equip_id, db);
-        String[] equipArr = new String[5];
-        while(rs.next()){
-            for (int i = 1; i < 6; i++){
-                String record = rs.getString(i);
-                equipArr[i-1] = record;
-            }
-        }
-        String title = equipArr[1];
-        String newInvQty = Integer.parseInt(equipArr[2]) + qty;
-
         //Get profile elements
         //employee: empl_id, fname, lname, access, phone, username, password
         String profileArr[] = userProfile(username);
         //Set account tablename
         String tableName = profileArr[1] + "_" + profileArr[2];
-       
-        //Insert user account record
-        String transactionID = GetNewID(tableName);
-        db.SqlInsert(tableName, "transaction_id, equip_id, title, qty, date", "'" + transactionID + "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
         
-        //Update Inventory available
-        db.SqlUpdate("inventory", "available = '" + newInvQty + "'", "equip_id = '" + equip_id + "'");
+        //Get equipment elements
+        //Inventory: equip_id, title(, available, total, vendor Not Needed in Array)
+        // 2 dimensional Array  cart= {{equip_id, title}, {equip_id, title}, {equip_id, title}.....}
+        Connection Conn = db.getConn();
+        Statement sqlStmt = Conn.createStatement();
+        String[][] cart =  new String[order.length][2];//2d Array of order items
         
-        //Update equipment_hist
-        String hist_id = GetNewID("equipment_hist");
-        db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
-        
-        //Update emp_equipment
-        //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
-        //If new qty equals 0 then drop record
-        ///working issue- can't insert if exists, but can't update if doesn't exist.
+        //Loop through items to populate 2D array of order list
+        for (int i = 0; i < order.length; i++){
+            String query = "SELECT equip_id title FROM inventory WHERE empl_id = '" + order[i] + "'";
+            ResultSet rs = sqlStmt.executeQuery(db.Clean(query));
+            
+            for (int j = 0; j < 3; j++){
+                try {
+                    if (rs.next()){ // We only want the first value of the first column if there is data returned
+                        cart[order[i]][j]= rs.getString(j); 
+                    }
+                }
+                catch (Exception err) {
+                    err.printStackTrace();
+                    System.out.println("An error occured when executing the query '" + query + "'.\nPlease review the error below for the cause of the exception." +
+                                       "\nError: " + err.getMessage());
+                }
+            }
+        }
+  
+        //Loop through the tables to update each
+        for(int i = 0; i < order.length; i ++){
+            //Insert user account record
+            String transactionID = GetNewID(tableName);
+            db.SqlInsert(tableName, "transaction_id, equip_id, title, qty, date", "'" + transactionID + "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
+
+            //Update Inventory available
+            for (int i = 0; i < order.length; i++){
+                InventoryDB.update(equipArr[i]);
+            {
+            //Update equipment_hist
+            String hist_id = GetNewID("equipment_hist");
+            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
+
+            //Update emp_equipment
+            //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
+            //If new qty equals 0 then drop record
+            ///working issue- can't insert if exists, but can't update if doesn't exist.
+        }
         db.Dispose();
     }
     

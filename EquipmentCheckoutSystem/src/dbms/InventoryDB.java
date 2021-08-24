@@ -37,9 +37,9 @@ public class InventoryDB {
     }
    
 
-     public static void update(String equip_ID, String newTitle, String newAvailable, String newTotal) {
+     public static void update(String equip_ID, String newAvailable) {
         DBConnect db = new DBConnect();
-        db.SqlUpdate("Inventory", "title = '" + newTitle + "', available = '" + newAvailable + "', total = '" + newTotal, equip_ID);
+        db.SqlUpdate("Inventory", "available = '" + newAvailable + "'", "equip_id = '" + equip_ID + "'");
         db.Dispose();
         System.out.println("Inventory Item updated successfully!");
     }
