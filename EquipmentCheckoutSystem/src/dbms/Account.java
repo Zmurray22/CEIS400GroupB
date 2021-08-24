@@ -41,16 +41,19 @@ public class Account {
         //Search for existing user account table
         //Return if already exists
         if (checkExists(tableName)){
-            System.out.println("Account already exists");
+            System.out.println("Account " + tableName + " already exists");
             return;
         }
         //Create table
         db.SqlCreateFromTemplate("account_temp", tableName);
         if (checkExists(tableName)){
             System.out.println("Account created");
-            return;
-        } 
+        }
+        else{
+            System.out.println("Account could not be created");
+        }
         db.Dispose();
+        return;
     }
     
     public static void deleteAcc(String username) throws SQLException{
