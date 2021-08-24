@@ -61,6 +61,6 @@ public class AccountTest {
         System.out.println("------------------------Verify if account exists, or create one");
         //Verify if account exists, or create one
         Account.createAcc(username);       
-        Account.createAcc(username2);
+        Account.createAcc(username2.toLowerCase());
     }
 }

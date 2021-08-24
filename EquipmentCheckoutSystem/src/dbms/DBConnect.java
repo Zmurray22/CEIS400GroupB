@@ -142,8 +142,8 @@ public class DBConnect
         return val;
     }
     public void SqlCreateFromTemplate(String templateName, String newTableName){
-            String query = "CREATE TABLE IF NOT EXISTS '" + newTableName + "' LIKE '" + templateName.toLowerCase() + "'";
-            String query2 = "INSERT '" + newTableName + "' SELECT * FROM '" + templateName.toLowerCase() + "'";
+            String query = "CREATE TABLE IF NOT EXISTS " + newTableName.toLowerCase() + " LIKE " + templateName.toLowerCase() + ";";
+            String query2 = "INSERT " + newTableName + " SELECT * FROM " + templateName.toLowerCase() + ";";
         try{
             Statement sqlStmt = Conn.createStatement();
             sqlStmt.executeUpdate(Clean(query));
