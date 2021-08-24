@@ -95,11 +95,7 @@ public class Account {
         //Store the time of transaction     
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
         LocalDateTime now = LocalDateTime.now();
-        //Get profile elements
-        //employee: empl_id, fname, lname, access, phone, username, password
-        String profileArr[] = userProfile(username);
-        //Set account tablename
-        String tableName = profileArr[1] + "_" + profileArr[2];
+        
         
         //Get equipment elements
         //Inventory: equip_id, title, available, total, vendor
@@ -114,6 +110,12 @@ public class Account {
         String title = equipArr[1];
         String newInvQty = Integer.parseInt(equipArr[2]) + qty;
 
+        //Get profile elements
+        //employee: empl_id, fname, lname, access, phone, username, password
+        String profileArr[] = userProfile(username);
+        //Set account tablename
+        String tableName = profileArr[1] + "_" + profileArr[2];
+       
         //Insert user account record
         String transactionID = GetNewID(tableName);
         db.SqlInsert(tableName, "transaction_id, equip_id, title, qty, date", "'" + transactionID + "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
