@@ -30,6 +30,26 @@ public class Account {
         return !"0".equals(exists);       
     }
     
+    public static void showAccount(String username) throws SQLException{
+         //Check for account table under user's name and print
+        DBConnect db = new DBConnect();
+        
+        String[] profile = Account.userProfile(username);
+        String tableName = profile[1] + "_" + profile[2];
+        if (Account.checkExists(tableName)){
+            System.out.println("Account " + tableName + " exists");
+            ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
+            while(rs.next()){
+                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
+                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
+            }
+        }
+        else{
+            System.out.println("Account " + tableName + " does not exist");
+        }
+        db.Dispose();
+    }
+    
     public static void createAcc(String username) throws SQLException{
         //Create an account table for a given user if it does not already exist
         DBConnect db = new DBConnect();
@@ -60,7 +80,7 @@ public class Account {
         //Delete user Account table
         DBConnect db = new DBConnect();
         //Pull the first and last name of the user from username
-         //Get profile elements
+        //Get profile elements
         String profileArr[] = userProfile(username);
         //Set account tablename
         String tableName = profileArr[1] + "_" + profileArr[2];
@@ -128,26 +148,6 @@ public class Account {
         //return array of profile elements
         db.Dispose();
         return profileArr;
-    }
-    
-    public static void showAccount(String username) throws SQLException{
-         //Check for account table under user's name and print
-        DBConnect db = new DBConnect();
-        
-        String[] profile = Account.userProfile(username);
-        String tableName = profile[1] + "_" + profile[2];
-        if (Account.checkExists(tableName)){
-            System.out.println("Account " + tableName + " exists");
-            ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
-            while(rs.next()){
-                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
-                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
-            }
-        }
-        else{
-            System.out.println("Account " + tableName + " does not exist");
-        }
-        db.Dispose();
     }
     
      // This method will auto increment the current equipment_hist hist_id 
