@@ -18,8 +18,9 @@ public class AccountTest {
         String equip_id2 = "15";
         String qty2 = "2";
         
+        System.out.println("------------------------Verify checking if account table exists");
         //Verify checking if account table exists
-        if (Account.checkExists("table")){
+        if (Account.checkExists(table)){
             System.out.println("Table " + table + " exists");
         }
         else{
@@ -31,7 +32,8 @@ public class AccountTest {
         else{
             System.out.println("Table " + table2 + " does not exist");
         }
-   
+       
+        System.out.println("------------------------Verify if existing account can be displayed");
         //Verify if existing account can be displayed
         Account.showAccount(username);
         Account.showAccount(username2);
@@ -39,7 +41,8 @@ public class AccountTest {
         //Verify if account table can be updated
         //Account.update(username, equip_id, qty);
         //Account.update(username, equip_id, qty);
-        
+       
+        System.out.println("------------------------Verify if userProfile can be displayed");
         //Verify if userProfile can be displayed
         String profileArr[] = Account.userProfile(username);
                     
@@ -54,7 +57,8 @@ public class AccountTest {
                     System.out.println("Employee ID: " + profileArr2[0] + "\nFirst Name: " + profileArr2[1] + 
                      "\nLast Name: " + profileArr2[2] + "\nAccess Level: " + profileArr2[3] + "\nPhone: " + 
                     profileArr2[4] + "\nUsername: " + profileArr2[5]);
-        
+       
+        System.out.println("------------------------Verify if account exists, or create one");
         //Verify if account exists, or create one
         Account.createAcc(username);       
         Account.createAcc(username2);
