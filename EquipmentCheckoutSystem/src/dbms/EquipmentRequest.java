@@ -10,11 +10,14 @@ public class EquipmentRequest {
 
     private ArrayList<String> order = new ArrayList<String>();
     private ArrayList<String> cart = new ArrayList<String>();
-    private String empl_ID;
+    private String userID;
     private String fname;
     private String lname;
     private String access;
 
+    public EquipmentRequest() {
+    }
+   
     public String getFname() {
         return fname;
     }
@@ -39,18 +42,14 @@ public class EquipmentRequest {
         this.access = access;
     }
     
-
-    public String getCurrentUser() {
-        return empl_ID;
+    public String userID() {
+        return userID;
     }
 
-    public void setCurrentUser(String currentUser) {
-        this.empl_ID = currentUser;
+    public void userID(String currentUser) {
+        this.userID = currentUser;
     }
-
-    public EquipmentRequest() {
-    }
-    
+ 
     public ArrayList<String> getOrder() {
         return order;
     }
@@ -59,11 +58,11 @@ public class EquipmentRequest {
         this.order = order;
     }
 
-    public ArrayList<String> getItems() {
+    public ArrayList<String> getCart() {
         return cart;
     }
 
-    public void setItems(ArrayList<String> items) {
+    public void setCart(ArrayList<String> cart) {
         this.cart = cart;
     }
     

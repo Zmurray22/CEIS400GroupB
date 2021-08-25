@@ -420,29 +420,30 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         // TODO add your handling code here:
         String equipID = txtEquipID.getText();
-        Arrays.toString(order);
-        ArrayList<String>ArrListObj  = new ArrayList<String>(Arrays.asList(order));
+        //Arrays.toString(order);
+        //ArrayList<String>ArrListObj  = new ArrayList<String>(Arrays.asList(order));
         //if the equipID has been input and is not empty
         if(!equipID.equals(""))
         {
-            //Open the Database and run the search for that EquipID and it's respective information
+                //Open the Database and run the search for that EquipID and it's respective information
+            User.addToCart(equipID);
             DBConnect db = new DBConnect();
-        try{
-        ResultSet rs = InventoryDB.search(equipID, db);
-        
-        while(rs.next())
-        {
-        ArrListObj.add(rs.getString(1));
-        order = ArrListObj.toArray(order);
-        JOptionPane.showMessageDialog(this, rs.getString(2) + " has been placed in the Cart. When finished, select Order and your Cart will be displayed.");
-        }
-        rs.close();
-        
-        }catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
-        }
-        db.Dispose(); //Closing the connection to the Database
+            try{
+                ResultSet rs = InventoryDB.search(equipID, db);
+
+                while(rs.next())
+                {
+                //ArrListObj.add(rs.getString(1));
+                //order = ArrListObj.toArray(order);
+                JOptionPane.showMessageDialog(this, rs.getString(2) + " has been placed in the Cart. When finished, select Order and your Cart will be displayed.");
+                }
+                rs.close();
+
+            }
+            catch(Exception ex){
+                JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+            }
+            db.Dispose(); //Closing the connection to the Database
         }
         else
         {
