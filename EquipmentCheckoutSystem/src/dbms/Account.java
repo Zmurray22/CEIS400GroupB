@@ -152,7 +152,7 @@ public class Account {
         
         DBConnect db = new DBConnect();
         //Create array to hold the fields
-        ResultSet rs = EmployeeDB.search(username);
+        ResultSet rs = EmployeeDB.search(username, db);
         String[] profileArr = new String[6];
         while(rs.next()){
             for (int i = 1; i < 7; i++){
