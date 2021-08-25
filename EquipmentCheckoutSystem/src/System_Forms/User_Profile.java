@@ -10,11 +10,16 @@ import javax.swing.ImageIcon;
 import System_Forms.Login_Form;
 import System_Forms.Equipment_Search_Form;
 import dbms.DBConnect;
+import dbms.Account;
 import dbms.EquipmentRequest;
 import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import ims.main;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -27,14 +32,24 @@ public class User_Profile extends javax.swing.JFrame {
      */
     public User_Profile() {
         initComponents();;
-        DBConnect db = new DBConnect();
-        
-        
-       
+
         txtFirstName.setText(ims.main.User.getFname());
         txtLastName.setText(ims.main.User.getLname());
-        String userID = db.SqlSelectSingle("SELECT empl_ID FROM employee WHERE username = " + "'" + txtFirstName.getText() + "'" + "");
-        
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM account_temp");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+      
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
     
      }
     
@@ -61,7 +76,7 @@ public class User_Profile extends javax.swing.JFrame {
         txtFirstName = new javax.swing.JTextPane();
         jScrollPane3 = new javax.swing.JScrollPane();
         txtLastName = new javax.swing.JTextPane();
-        txtEqReturnID = new javax.swing.JTextField();
+        txtTransactionID = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuDashboard = new javax.swing.JMenuItem();
@@ -82,7 +97,7 @@ public class User_Profile extends javax.swing.JFrame {
         jLabelLastName.setText("Last Name:");
 
         jLabelUserID.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jLabelUserID.setText("Equipment ID");
+        jLabelUserID.setText("Transaction ID");
 
         jLabelCheckedOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabelCheckedOut.setText("Checked Out Items");
@@ -135,7 +150,7 @@ public class User_Profile extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                                            .addComponent(txtEqReturnID))))
+                                            .addComponent(txtTransactionID))))
                                 .addGap(89, 89, 89)
                                 .addComponent(btnReturnItems, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -160,7 +175,7 @@ public class User_Profile extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabelUserID, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtEqReturnID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtTransactionID, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(46, 46, 46)))
@@ -232,7 +247,22 @@ private JFrame frame;
 
     private void btnReturnItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReturnItemsActionPerformed
         // TODO add your handling code here:
-        
+        String ID = txtTransactionID.getText();
+         
+         
+        if("".equals(ID))
+        {
+            JOptionPane.showMessageDialog(this, "Error. Please enter the Transaction ID.",
+            "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+        try {
+            Account.returnEquip(ims.main.User.getTableName(), Integer.parseInt(ID));
+        } catch (SQLException ex) {
+            Logger.getLogger(User_Profile.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
     }//GEN-LAST:event_btnReturnItemsActionPerformed
 
     /**
@@ -287,8 +317,8 @@ private JFrame frame;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JMenuItem mnuDashboard;
     private javax.swing.JMenuItem mnuExit;
-    private javax.swing.JTextField txtEqReturnID;
     private javax.swing.JTextPane txtFirstName;
     private javax.swing.JTextPane txtLastName;
+    private javax.swing.JTextField txtTransactionID;
     // End of variables declaration//GEN-END:variables
 }
