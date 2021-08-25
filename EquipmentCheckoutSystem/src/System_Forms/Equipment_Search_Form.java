@@ -457,46 +457,41 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
 
         String equipID = txtEquipID.getText();
         DBConnect db = new DBConnect();
-        try {
-            Info = Account.userProfile(Login_Form.username);
-            if (Info[3].equals("4"))
+        /*Info = Account.userProfile(Login_Form.username);*/
+        if (Info[3].equals("4"))
+        {
+            JOptionPane.showMessageDialog(this, "This account has permission to Delete");
+            if(equipID.equals(""))
             {
-                JOptionPane.showMessageDialog(this, "This account has permission to Delete");
-                if(equipID.equals(""))
-                {
-                    JOptionPane.showMessageDialog(this, "Error. Please enter the Equipment ID associated with the Inventory Item you                         wish to delete.",
-                    "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                //If EquipID information is present, continue with the search..
-                try{
-                    ResultSet rs = InventoryDB.search(equipID, db);
-                    DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
-                    model.setRowCount(0); //This is essential to clear the table prior to searching
+                JOptionPane.showMessageDialog(this, "Error. Please enter the Equipment ID associated with the Inventory Item you                         wish to delete.",
+                        "Error", JOptionPane.ERROR_MESSAGE);
+            }
+            //If EquipID information is present, continue with the search..
+            try{
+                ResultSet rs = InventoryDB.search(equipID, db);
+                DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+                model.setRowCount(0); //This is essential to clear the table prior to searching
                 while(rs.next())
                 {
-                   model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString                       ("total"), rs.getString("vendor_id")});
+                    model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString                       ("total"), rs.getString("vendor_id")});
                 }
             
                 if(JOptionPane.showConfirmDialog(frame, "Confirm if you wish to delete the shown data entry.", "Equipment Search",
-                    JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+                        JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
                 {
                     db.SqlDelete("Inventory", "equip_id = " + equipID);
                 }
                 rs.close();
-            
-                }catch(Exception ex)
-                {
-                    JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.                             ERROR_MESSAGE);
-                }
-            }
-            else
+                
+            }catch(Exception ex)
             {
-                JOptionPane.showMessageDialog(this, Info[3]);
+                JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.                             ERROR_MESSAGE);
             }
-            } catch (SQLException ex) 
-                {
-                    Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(this, Info[3]);
+        }
        
               
         //After complete, refresh the menu with the updated database
@@ -586,8 +581,8 @@ private JFrame frame;
             DBConnect db = new DBConnect();
             for(String ID : order){
              rs = db.SqlSelectSingle("SELECT title FROM Inventory WHERE equip_id = " + ID);
-             ArrListItems.add(rs);
-             Items = ArrListItems.toArray(Items);
+            /* ArrListItems.add(rs);
+             Items = ArrListItems.toArray(Items);*/
             }       
             
             if(JOptionPane.showConfirmDialog(frame, Items, "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){

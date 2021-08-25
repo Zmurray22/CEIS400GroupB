@@ -5,7 +5,10 @@
  */
 package System_Forms;
 
+import dbms.DBConnect;
+import dbms.EquipmentRequest;
 import java.awt.Image;
+import ims.main;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -19,10 +22,7 @@ public class Login_Form extends javax.swing.JFrame {
     /**
      * Creates new form Login_Form
      */
-    
     //Variable for username
-    static String username;
-    static String password;
     public Login_Form() {
         initComponents();
         
@@ -176,8 +176,9 @@ public class Login_Form extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {  
-        username = txtUsername.getText();
-        password = txtPassword.getText();
+       
+        
+ 
         if (dbms.EmployeeDB.authenticate(txtUsername.getText(), txtPassword.getText()))
         {
             System_Forms.User_Dashboard_Form dashboard = new System_Forms.User_Dashboard_Form();
@@ -189,6 +190,12 @@ public class Login_Form extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Login Failed\nIncorrect username and/or password");
             txtPassword.setText("");
         }
+        DBConnect db = new DBConnect();
+        
+        String fNameSql = db.SqlSelectSingle("SELECT fName FROM employee WHERE username = " + "'" + txtUsername.getText() + "'" + "");
+        String lNameSql = db.SqlSelectSingle("SELECT lName FROM employee WHERE username = " + "'" + txtUsername.getText() + "'" + "");
+        ims.main.User.setFname(fNameSql);
+        ims.main.User.setLname(lNameSql);
     } 
 
     /**
