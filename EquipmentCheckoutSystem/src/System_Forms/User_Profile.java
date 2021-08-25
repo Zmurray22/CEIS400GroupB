@@ -263,6 +263,24 @@ private JFrame frame;
             Logger.getLogger(User_Profile.class.getName()).log(Level.SEVERE, null, ex);
         }
         }
+        
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM " + ims.main.User.getTableName());
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+        model.setRowCount(0); //This is essential to clear the table prior to searching
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
+        txtTransactionID.setText("");
+        txtTransactionID.requestFocus();
     }//GEN-LAST:event_btnReturnItemsActionPerformed
 
     /**

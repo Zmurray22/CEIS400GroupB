@@ -165,13 +165,9 @@ public class Account {
     
     public static void returnEquip(String tableName, Integer transactionID) throws SQLException{
         DBConnect db = new DBConnect();
-        
-        Connection Conn = db.getConn();
-        Statement sqlStmt = Conn.createStatement();
-        
-        String query = "DELETE FROM " + tableName + " WHERE transaction_id=" + transactionID + "";
-        ResultSet rs = sqlStmt.executeQuery(db.Clean(query));       
-    }
+        db.SqlDelete(tableName, "transaction_id=" + transactionID) ;
+        db.Dispose();
+    } 
     
      // This method will auto increment the current equipment_hist hist_id 
     private static String GetNewID(String tableName) {
