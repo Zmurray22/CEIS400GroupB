@@ -76,7 +76,7 @@ public class EquipmentRequest {
         this.cart = cart;
     }
     
-    public void clearAll(){
+    public void clearCart(){
         cart.clear();
     }
     
@@ -88,5 +88,6 @@ public class EquipmentRequest {
         String[] orderArr = cart.toArray(new String[0]);
         System.out.println(Arrays.toString(orderArr));
         Account.update(getUserName(), orderArr);
+        clearCart();
     }
 }
