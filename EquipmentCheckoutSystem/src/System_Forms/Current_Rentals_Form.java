@@ -5,8 +5,11 @@
  */
 package System_Forms;
 
+import dbms.DBConnect;
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +22,21 @@ public class Current_Rentals_Form extends javax.swing.JFrame {
      */
     public Current_Rentals_Form() {
         initComponents();
+         DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM emp_equipment");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)tblCurrentRentals.getModel();
+      
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -34,7 +52,7 @@ public class Current_Rentals_Form extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        EquipTable = new javax.swing.JTable();
+        tblCurrentRentals = new javax.swing.JTable();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu3 = new javax.swing.JMenu();
         mnuDashboard = new javax.swing.JMenuItem();
@@ -48,15 +66,15 @@ public class Current_Rentals_Form extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         jLabel1.setText("Current Rentals");
 
-        EquipTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblCurrentRentals.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Equipment ID", "Equipment Title", "Number Available", "Total in Stock", "Vendor ID"
+                "Employee ID", "Equipment ID ", "Total"
             }
         ));
-        jScrollPane1.setViewportView(EquipTable);
+        jScrollPane1.setViewportView(tblCurrentRentals);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -180,7 +198,6 @@ private JFrame frame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable EquipTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -190,5 +207,6 @@ private JFrame frame;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem mnuDashboard;
     private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JTable tblCurrentRentals;
     // End of variables declaration//GEN-END:variables
 }

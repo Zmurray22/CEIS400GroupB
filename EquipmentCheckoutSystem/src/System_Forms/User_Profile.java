@@ -91,10 +91,13 @@ public class User_Profile extends javax.swing.JFrame {
             }
         });
 
+        txtFirstName.setEditable(false);
         jScrollPane2.setViewportView(txtFirstName);
 
+        txtLastName.setEditable(false);
         jScrollPane3.setViewportView(txtLastName);
 
+        txtUserID.setEditable(false);
         jScrollPane4.setViewportView(txtUserID);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
