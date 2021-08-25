@@ -62,5 +62,7 @@ public class AccountTest {
         //Verify if account exists, or create one
         Account.createAcc(username);       
         Account.createAcc(username2);
+        
+        
     }
 }

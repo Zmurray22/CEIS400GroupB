@@ -131,19 +131,19 @@ public class Account {
         //Loop through the tables to update each
         for(int i = 0; i < order.length; i ++){
             String transactionID = GetNewID(tableName);
-            String equipID = cart[i][1];
-            String title = cart[i][2];
+            String equipID = cart[i][0];
+            String title = cart[i][1];
             
             //Insert user account record
             db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "'" + equipID + "', " + title + "', '" + now + "'");
 
             //Update Inventory available
-            for (int i = 0; i < order.length; i++){
-                InventoryDB.update(equipArr[i]);
-            {
+            String subInv = "available - 1";
+            InventoryDB.update(Integer.parseInt(equipID), subInv);
+            
             //Update equipment_hist
             String hist_id = GetNewID("equipment_hist");
-            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + qty + "', '" + now + "'");
+            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + equipID + "', '" + now + "'");
 
             //Update emp_equipment
             //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
