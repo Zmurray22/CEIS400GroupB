@@ -14,6 +14,16 @@ public class EquipmentRequest {
     private String fname;
     private String lname;
     private String access;
+    private String tableName;
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public void setTableName(String tableName) {
+        
+        this.tableName = fname + "_" + lname;
+    }
 
     public EquipmentRequest() {
     }
@@ -50,11 +60,11 @@ public class EquipmentRequest {
         this.access = access;
     }
     
-    public String userID() {
+    public String getUserID() {
         return userID;
     }
 
-    public void userID(String currentUser) {
+    public void setUserID(String currentUser) {
         this.userID = currentUser;
     }
  
