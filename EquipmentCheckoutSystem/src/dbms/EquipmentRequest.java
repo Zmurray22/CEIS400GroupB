@@ -11,6 +11,9 @@ public class EquipmentRequest {
     private ArrayList<String> cart = new ArrayList<String>();
     private String userID;
     private String userName;
+    private String fname;
+    private String lname;
+    private String access;
 
     public EquipmentRequest() {
     }
@@ -22,9 +25,6 @@ public class EquipmentRequest {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    private String fname;
-    private String lname;
-    private String access;
     
     public String getFname() {
         return fname;
@@ -74,8 +74,8 @@ public class EquipmentRequest {
         cart.add(equipID);
     }
     
-    public void sendOrder(ArrayList<String> sentOrder) throws ParseException, SQLException{
-        String[] orderArr = sentOrder.toArray(new String[0]);
+    public void sendOrder() throws ParseException, SQLException{
+        String[] orderArr = cart.toArray(new String[0]);
         System.out.println(Arrays.toString(orderArr));
         Account.update(getUserName(), orderArr);
     }

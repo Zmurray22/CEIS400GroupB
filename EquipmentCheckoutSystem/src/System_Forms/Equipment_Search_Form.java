@@ -13,6 +13,7 @@ import dbms.EquipmentRequest;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Level;
@@ -41,10 +42,10 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     
     String[]Info = {};
     
-    EquipmentRequest User;
+    
     
     public Equipment_Search_Form() {
-        this.User = new EquipmentRequest();
+       
         initComponents();
         
         this.setLocationRelativeTo(null);
@@ -426,7 +427,7 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
         if(!equipID.equals(""))
         {
                 //Open the Database and run the search for that EquipID and it's respective information
-            User.addToCart(equipID);
+            ims.main.User.addToCart(equipID);
             DBConnect db = new DBConnect();
             try{
                 ResultSet rs = InventoryDB.search(equipID, db);
@@ -568,10 +569,10 @@ private JFrame frame;
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
         //Arrays.toString(Items);
-        //ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
+        ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
         //Grab the List of Equipment ID ArrayList 
         //Validation that there is something in the ArrayList
-        if(User.getCart().isEmpty()){
+        if( ims.main.User.getCart().isEmpty()){
             JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
             "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -579,14 +580,21 @@ private JFrame frame;
             //use the ArrayList to locate each Equipment associated with that ID
             String rs = "";
             DBConnect db = new DBConnect();
-            for(String ID : order){
+            for(String ID : ims.main.User.getCart()){
              rs = db.SqlSelectSingle("SELECT title FROM Inventory WHERE equip_id = " + ID);
             /* ArrListItems.add(rs);
              Items = ArrListItems.toArray(Items);*/
             }       
             
-            if(JOptionPane.showConfirmDialog(frame, Items, "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
-                   JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
+            if(JOptionPane.showConfirmDialog(frame,Items, "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
+                try {  
+                    ims.main.User.sendOrder();
+                } catch (ParseException ex) {
+                    Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
             for (String ID : Items){
