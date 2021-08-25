@@ -8,7 +8,6 @@ import java.util.Arrays;
 
 public class EquipmentRequest {
 
-    private ArrayList<String> order = new ArrayList<String>();
     private ArrayList<String> cart = new ArrayList<String>();
     private String userID;
     private String userName;
@@ -59,14 +58,6 @@ public class EquipmentRequest {
         this.userID = currentUser;
     }
  
-    public ArrayList<String> getOrder() {
-        return order;
-    }
-
-    public void setOrder(ArrayList<String> order) {
-        this.order = order;
-    }
-
     public ArrayList<String> getCart() {
         return cart;
     }
@@ -76,7 +67,6 @@ public class EquipmentRequest {
     }
     
     public void clearAll(){
-        order.clear();
         cart.clear();
     }
     

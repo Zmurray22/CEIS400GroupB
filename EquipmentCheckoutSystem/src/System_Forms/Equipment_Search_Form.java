@@ -572,11 +572,11 @@ private JFrame frame;
     //Order button to confirm the Cart list to the Account user
     private void btnOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOrderActionPerformed
         // TODO add your handling code here:
-        Arrays.toString(Items);
-        ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
+        //Arrays.toString(Items);
+        //ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
         //Grab the List of Equipment ID ArrayList 
         //Validation that there is something in the ArrayList
-        if(order.length == 0)
+        if(User.getOrder().isEmpty())
         {
         JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
 "Error", JOptionPane.ERROR_MESSAGE);
