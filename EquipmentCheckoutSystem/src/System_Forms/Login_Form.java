@@ -200,6 +200,8 @@ public class Login_Form extends javax.swing.JFrame {
         ims.main.User.setLname(lNameSql);
         ims.main.User.setUserName(txtUsername.getText());
         ims.main.User.setTableName();
+        ims.main.User.setUserID(userID);
+        ims.main.User.setAccess(access);
     } 
 
     /**
