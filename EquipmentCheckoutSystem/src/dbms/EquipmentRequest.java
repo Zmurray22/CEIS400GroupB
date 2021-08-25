@@ -1,12 +1,28 @@
 package dbms;
 ///store list of equipment requests (cart) and update account and dbms when finished
 
+import java.sql.SQLException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class EquipmentRequest {
 
     private ArrayList<String> order = new ArrayList<String>();
-    private ArrayList<String> items = new ArrayList<String>();
+    private ArrayList<String> cart = new ArrayList<String>();
+    private String equipID;
+    private String fname;
+    private String lname;
+    private String access;
+    
+
+    public String getCurrentUser() {
+        return equipID;
+    }
+
+    public void setCurrentUser(String currentUser) {
+        this.equipID = currentUser;
+    }
 
     public EquipmentRequest() {
     }
@@ -20,10 +36,25 @@ public class EquipmentRequest {
     }
 
     public ArrayList<String> getItems() {
-        return items;
+        return cart;
     }
 
     public void setItems(ArrayList<String> items) {
-        this.items = items;
+        this.cart = cart;
+    }
+    
+    public void clearAll(){
+        order.clear();
+        cart.clear();
+    }
+    
+    public void addToCart(String equipID){
+        cart.add(equipID);
+    }
+    
+    public void sendOrder(ArrayList<String> sentOrder) throws ParseException, SQLException{
+        String[] orderArr = sentOrder.toArray(new String[0]);
+        System.out.println(Arrays.toString(orderArr));
+        Account.update(getCurrentUser(), orderArr);
     }
 }
