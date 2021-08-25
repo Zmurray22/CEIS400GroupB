@@ -24,7 +24,7 @@ public class main {
     public static EquipmentRequest User;
 
     public main(EquipmentRequest User) {
-        this.User = User;
+        main.User = User;
     }
     
     public static void main(String[] args) throws SQLException {
