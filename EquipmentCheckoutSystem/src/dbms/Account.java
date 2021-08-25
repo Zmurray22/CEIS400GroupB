@@ -89,7 +89,7 @@ public class Account {
         db.Dispose();
     }
     
-    public static void update(String username, Integer order[]) throws ParseException, SQLException{
+    public static void update(String username, String order[]) throws ParseException, SQLException{
         //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
         DBConnect db = new DBConnect();
         //Store the time of transaction     
