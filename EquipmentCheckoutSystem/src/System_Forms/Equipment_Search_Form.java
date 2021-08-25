@@ -9,6 +9,7 @@ import dbms.DBConnect;
 import dbms.InventoryDB;
 import dbms.Account;
 import System_Forms.Login_Form;
+import dbms.EquipmentRequest;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -40,7 +41,10 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     
     String[]Info = {};
     
+    EquipmentRequest User;
+    
     public Equipment_Search_Form() {
+        this.User = new EquipmentRequest();
         initComponents();
         
         this.setLocationRelativeTo(null);
