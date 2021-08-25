@@ -586,7 +586,7 @@ private JFrame frame;
              Items = ArrListItems.toArray(Items);*/
             }       
             
-            if(JOptionPane.showConfirmDialog(frame,Items, "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+            if(JOptionPane.showConfirmDialog(frame,ims.main.User.getCart(), "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
                 JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
                 try {  
                     ims.main.User.sendOrder();
@@ -597,10 +597,8 @@ private JFrame frame;
                 }
             }
 
-            for (String ID : Items){
-               String sql =("SELECT * FROM Inventory WHERE title = " + ID); 
-
-                JOptionPane.showMessageDialog(this, db.SqlSelectAll(sql));
+            for (String element: ims.main.User.getCart()) {
+                JOptionPane.showMessageDialog(this, element);
             }
         }
     }//GEN-LAST:event_btnOrderActionPerformed
