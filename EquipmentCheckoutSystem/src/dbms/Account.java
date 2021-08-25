@@ -126,7 +126,7 @@ public class Account {
             String title = cart[i][1];
             
             //Insert user account record
-            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', " + equipID + "', " + title + "', '" + now + "'");
+            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', " + equipID + "', " + title + "', '" + now + "';");
 
             //Update Inventory available
             String subInv = "available - 1";
