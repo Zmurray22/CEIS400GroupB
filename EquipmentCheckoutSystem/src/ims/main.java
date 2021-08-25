@@ -21,11 +21,11 @@ import javax.swing.JFrame;
 //test for Zach
 public class main { 
     
-    public static EquipmentRequest User;
+     public static EquipmentRequest User = new EquipmentRequest();
 
-    public main(EquipmentRequest User) {
-        main.User = User;
-    }
+
+    
+
     
     public static void main(String[] args) throws SQLException {
         //DBConnect db = new DBConnect();

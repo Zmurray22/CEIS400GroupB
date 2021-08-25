@@ -7,21 +7,36 @@ package System_Forms;
 
 import java.awt.Image;
 import javax.swing.ImageIcon;
+import System_Forms.Login_Form;
+import System_Forms.Equipment_Search_Form;
+import dbms.DBConnect;
+import dbms.EquipmentRequest;
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import ims.main;
 
 /**
  *
  * @author Zach
  */
 public class User_Profile extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form User_Profile
      */
     public User_Profile() {
         initComponents();;
-    }
+        DBConnect db = new DBConnect();
+        
+        
+       
+        txtFirstName.setText(ims.main.User.getFname());
+        txtLastName.setText(ims.main.User.getLname());
+        String userID = db.SqlSelectSingle("SELECT empl_ID FROM employee WHERE username = " + "'" + txtFirstName.getText() + "'" + "");
+        txtUserID.setText(userID);
+    
+     }
     
 
     /**
