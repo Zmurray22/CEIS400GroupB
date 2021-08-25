@@ -110,7 +110,7 @@ public class Account {
         String[][] cart =  new String[order.length][2];//2d Array of order items
         
         //Loop through items to populate 2D array of order list
-        for (int i = 0; i < order.length; i++){
+        for (int i = 0; i < (1-order.length); i++){
             String query = "SELECT equip_id, title FROM inventory WHERE equip_id = " + order[i] + "";
             ResultSet rs = sqlStmt.executeQuery(db.Clean(query));
             
@@ -177,7 +177,7 @@ public class Account {
      // This method will auto increment the current equipment_hist hist_id 
     private static String GetNewID(String tableName) {
         DBConnect db = new DBConnect(); // Create a database connection
-        String id = db.SqlSelectSingle("SELECT transaction_id FROM " + tableName + " ORDER BY hist_id DESC LIMIT 1"); // First try to get the top ID.
+        String id = db.SqlSelectSingle("SELECT transaction_id FROM " + tableName + " ORDER BY transaction_id DESC LIMIT 1"); // First try to get the top ID.
         if (id.equals("")) // This is incase there are no registered vendors in the software
             id = "1";
         else
