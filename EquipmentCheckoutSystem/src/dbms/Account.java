@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.sql.*;
 import java.text.ParseException;
+import java.util.Arrays;
 
 // fields- equip_id | title | qty | date
 public class Account {
@@ -110,17 +111,18 @@ public class Account {
         String[][] cart =  new String[order.length][2];//2d Array of order items
         
         //Loop through items to populate 2D array of order list
-        for (int i = 0; i < (1-order.length); i++){
+        for (int i = 0; i < order.length; i++){
             String query = "SELECT equip_id, title FROM inventory WHERE equip_id = " + order[i] + "";
-            ResultSet rs = sqlStmt.executeQuery(db.Clean(query));
-            
+            ResultSet rs = sqlStmt.executeQuery(db.Clean(query));            
+
             while (rs.next()){
-                cart[order[i]][0]= rs.getString(1); 
-                cart[order[i]][1]= rs.getString(2);
-            }  
-            rs.close(); // Remember to close your ResultSets
-            sqlStmt.close(); // And your SQL commands
+                cart[i][0]= rs.getString(1);
+                cart[i][1]= rs.getString(2);
+            }
+        rs.close();
         }
+        
+        System.out.println(Arrays.toString(cart));
         
         //Loop through the tables to update each
         for(int i = 0; i < order.length; i ++){
@@ -129,7 +131,7 @@ public class Account {
             String title = cart[i][1];
             
             //Insert user account record
-            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', " + equipID + "', " + title + "', '" + now + "'");
+            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', '" + equipID + "', '" + title + "', '" + now + "'");
 
             //Update Inventory available
             String subInv = "available - 1";
