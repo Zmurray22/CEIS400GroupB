@@ -19,6 +19,10 @@ public class Login_Form extends javax.swing.JFrame {
     /**
      * Creates new form Login_Form
      */
+    
+    //Variable for username
+    static String username;
+    static String password;
     public Login_Form() {
         initComponents();
         
@@ -171,7 +175,9 @@ public class Login_Form extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {  
+        username = txtUsername.getText();
+        password = txtPassword.getText();
         if (dbms.EmployeeDB.authenticate(txtUsername.getText(), txtPassword.getText()))
         {
             System_Forms.User_Dashboard_Form dashboard = new System_Forms.User_Dashboard_Form();

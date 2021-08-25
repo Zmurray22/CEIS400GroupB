@@ -8,6 +8,7 @@ package System_Forms;
 import dbms.DBConnect;
 import dbms.InventoryDB;
 import dbms.Account;
+import System_Forms.Login_Form;
 import java.awt.Image;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -449,49 +450,50 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     //Delete the searched entry from the database **EQUIPMANAGER ONLY**
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
-        
+        String equipID = txtEquipID.getText();
+        DBConnect db = new DBConnect();
         try {
-            Info = Account.userProfile("ewfoster");
+            Info = Account.userProfile(Login_Form.username);
             if (Info[3].equals("4"))
+            {
                 JOptionPane.showMessageDialog(this, "This account has permission to Delete");
+                if(equipID.equals(""))
+                {
+                    JOptionPane.showMessageDialog(this, "Error. Please enter the Equipment ID associated with the Inventory Item you                         wish to delete.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                //If EquipID information is present, continue with the search..
+                try{
+                    ResultSet rs = InventoryDB.search(equipID, db);
+                    DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
+                    model.setRowCount(0); //This is essential to clear the table prior to searching
+                while(rs.next())
+                {
+                   model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString                       ("total"), rs.getString("vendor_id")});
+                }
+            
+                if(JOptionPane.showConfirmDialog(frame, "Confirm if you wish to delete the shown data entry.", "Equipment Search",
+                    JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
+                {
+                    db.SqlDelete("Inventory", "equip_id = " + equipID);
+                }
+                rs.close();
+            
+                }catch(Exception ex)
+                {
+                    JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.                             ERROR_MESSAGE);
+                }
+            }
             else
             {
                 JOptionPane.showMessageDialog(this, Info[3]);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        String equipID = txtEquipID.getText();
-        DBConnect db = new DBConnect();
-        if(equipID.equals(""))
-        {
-        JOptionPane.showMessageDialog(this, "Error. Please enter the Equipment ID associated with the Inventory Item you wish to delete.",
-"Error", JOptionPane.ERROR_MESSAGE);
-        }
-        //If EquipID information is present, continue with the search..
-        try{
-            ResultSet rs = InventoryDB.search(equipID, db);
-            DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
-            model.setRowCount(0); //This is essential to clear the table prior to searching
-            while(rs.next())
+            } catch (SQLException ex) 
                 {
-                   model.addRow(new String[]{rs.getString("equip_id"), rs.getString("title"), rs.getString("available"), rs.getString("total"), rs.getString("vendor_id")});
+                    Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            
-           if(JOptionPane.showConfirmDialog(frame, "Confirm if you wish to delete the shown data entry.", "Equipment Search",
-                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
-           {
-               db.SqlDelete("Inventory", "equip_id = " + equipID);
-           }
-            rs.close();
-            
-        }catch(Exception ex)
-        {
-            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
-        }
-        //Closing the connection to the Database
-        
-        
+       
+              
         //After complete, refresh the menu with the updated database
         
         txtEquipID.setText("");
