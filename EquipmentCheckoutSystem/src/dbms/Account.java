@@ -139,7 +139,7 @@ public class Account {
             
             //Update equipment_hist
             String hist_id = GetNewID("equipment_hist");
-            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + equipID + "', '" + now + "'");
+            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + equipID + "', 'Checkout', '" + now + "'");
 
             //Update emp_equipment
             //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
