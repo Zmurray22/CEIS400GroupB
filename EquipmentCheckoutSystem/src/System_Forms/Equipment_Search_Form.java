@@ -7,15 +7,19 @@ package System_Forms;
 
 import dbms.DBConnect;
 import dbms.InventoryDB;
+import dbms.Account;
 import java.awt.Image;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JFrame;
-import dbms.EmployeeDB;
+
 
 /**
  *
@@ -32,6 +36,8 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
     
     //Items variable to be tagged onto the User upon Checkout
     String[] Items = {};
+    
+    String[]Info = {};
     
     public Equipment_Search_Form() {
         initComponents();
@@ -442,10 +448,19 @@ public class Equipment_Search_Form extends javax.swing.JFrame {
 
     //Delete the searched entry from the database **EQUIPMANAGER ONLY**
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
-        // TODO add your handling code here:
+
         
-        //ensure that the person logged in has the credentials to utilize this button
-        
+        try {
+            Info = Account.userProfile("ewfoster");
+            if (Info[3].equals("4"))
+                JOptionPane.showMessageDialog(this, "This account has permission to Delete");
+            else
+            {
+                JOptionPane.showMessageDialog(this, Info[3]);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Equipment_Search_Form.class.getName()).log(Level.SEVERE, null, ex);
+        }
         String equipID = txtEquipID.getText();
         DBConnect db = new DBConnect();
         if(equipID.equals(""))
@@ -575,6 +590,14 @@ private JFrame frame;
            {
                JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
            }
+        
+        for (String ID : Items)
+        {
+           String sql =("SELECT * FROM Inventory WHERE title = " + ID); 
+        
+            JOptionPane.showMessageDialog(this, db.SqlSelectAll(sql));
+        
+        }
         }
     }//GEN-LAST:event_btnOrderActionPerformed
 
