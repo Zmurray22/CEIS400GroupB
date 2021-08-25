@@ -5,8 +5,11 @@
  */
 package System_Forms;
 
+import dbms.DBConnect;
+import java.sql.ResultSet;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -19,6 +22,21 @@ public class Rental_History_Form extends javax.swing.JFrame {
      */
     public Rental_History_Form() {
         initComponents();
+        DBConnect db = new DBConnect();
+        String sql = ("SELECT * FROM equipment_hist");
+        try{
+        ResultSet rs = db.SqlSelectAll(sql);
+        DefaultTableModel model = (DefaultTableModel)tblRentalHistory.getModel();
+      
+        while (rs.next())
+        {
+        model.addRow(new String[]{rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)});
+        }
+        rs.close();
+        }catch(Exception ex)
+        {
+            JOptionPane.showMessageDialog(this, "Error. Database error: "+ ex.getMessage(), "Database Error.", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -33,7 +51,7 @@ public class Rental_History_Form extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         lblRentalHistory = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        EquipTable = new javax.swing.JTable();
+        tblRentalHistory = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         mnuDashboard = new javax.swing.JMenuItem();
@@ -47,15 +65,15 @@ public class Rental_History_Form extends javax.swing.JFrame {
         lblRentalHistory.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         lblRentalHistory.setText("Rental History");
 
-        EquipTable.setModel(new javax.swing.table.DefaultTableModel(
+        tblRentalHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Equipment ID", "Equipment Title", "Number Available", "Total in Stock", "Vendor ID"
+                "Transaction ID", "Employee ID", "Equipment ID", "Action", "History"
             }
         ));
-        jScrollPane1.setViewportView(EquipTable);
+        jScrollPane1.setViewportView(tblRentalHistory);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -179,7 +197,6 @@ private JFrame frame;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable EquipTable;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
@@ -188,5 +205,6 @@ private JFrame frame;
     private javax.swing.JLabel lblRentalHistory;
     private javax.swing.JMenuItem mnuDashboard;
     private javax.swing.JMenuItem mnuExit;
+    private javax.swing.JTable tblRentalHistory;
     // End of variables declaration//GEN-END:variables
 }
