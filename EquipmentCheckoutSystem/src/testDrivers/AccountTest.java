@@ -46,19 +46,11 @@ public class AccountTest {
        
         System.out.println("------------------------Verify if userProfile can be displayed");
         //Verify if userProfile can be displayed
-        String profileArr[] = Account.userProfile(username);
                     
                     //Print the profile data
-                    System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
-                     "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
-                    profileArr[4] + "\nUsername: " + profileArr[5]);
-        
-        String profileArr2[] = Account.userProfile(username2);
-                    
-                    //Print the profile data
-                    System.out.println("Employee ID: " + profileArr2[0] + "\nFirst Name: " + profileArr2[1] + 
-                     "\nLast Name: " + profileArr2[2] + "\nAccess Level: " + profileArr2[3] + "\nPhone: " + 
-                    profileArr2[4] + "\nUsername: " + profileArr2[5]);
+                     System.out.println("Employee ID: " + ims.main.User.getUserID() + "\nFirst Name: " + ims.main.User.getFname() + 
+                     "\nLast Name: " + ims.main.User.getLname() + "\nAccess Level: " + ims.main.User.getAccess() + "\nUsername: " + ims.main.User.getUserName());
+
        
         System.out.println("------------------------Verify if account exists, or create one");
         //Verify if account exists, or create one
