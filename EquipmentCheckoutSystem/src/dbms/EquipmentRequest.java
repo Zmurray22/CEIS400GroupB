@@ -10,7 +10,7 @@ public class EquipmentRequest {
 
     private ArrayList<String> order = new ArrayList<String>();
     private ArrayList<String> cart = new ArrayList<String>();
-    private String equipID;
+    private String empl_ID;
     private String fname;
     private String lname;
     private String access;
@@ -41,11 +41,11 @@ public class EquipmentRequest {
     
 
     public String getCurrentUser() {
-        return equipID;
+        return empl_ID;
     }
 
     public void setCurrentUser(String currentUser) {
-        this.equipID = currentUser;
+        this.empl_ID = currentUser;
     }
 
     public EquipmentRequest() {
