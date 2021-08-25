@@ -142,7 +142,7 @@ public class Account {
             db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + equipID + "', 'Checkout', '" + now + "'");
 
             //Update emp_equipment
-            //db.SqlInsert("emp_equipment", "empl_id, equip_id, total", "'" + profileArr[0] + "', '" + equip_id + "', '" + qty + "'");
+            db.SqlInsert("emp_equipment", "empl_id, equip_id, title", "'" + profileArr[0] + "', '" + equipID + "', '" + title + "'");
             //If new qty equals 0 then drop record
             ///working issue- can't insert if exists, but can't update if doesn't exist.
         }
