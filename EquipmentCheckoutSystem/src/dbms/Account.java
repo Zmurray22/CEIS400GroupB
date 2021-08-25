@@ -111,21 +111,13 @@ public class Account {
         
         //Loop through items to populate 2D array of order list
         for (int i = 0; i < order.length; i++){
-            String query = "SELECT equip_id title FROM inventory WHERE empl_id = '" + order[i] + "'";
+            String query = "SELECT equip_id, title FROM inventory WHERE equip_id = " + order[i] + "";
             ResultSet rs = sqlStmt.executeQuery(db.Clean(query));
             
-            for (int j = 0; j < 3; j++){
-                try {
-                    if (rs.next()){ // We only want the first value of the first column if there is data returned
-                        cart[order[i]][j]= rs.getString(j); 
-                    }
-                }
-                catch (Exception err) {
-                    err.printStackTrace();
-                    System.out.println("An error occured when executing the query '" + query + "'.\nPlease review the error below for the cause of the exception." +
-                                       "\nError: " + err.getMessage());
-                }
-            }
+            while (rs.next()){
+                cart[order[i]][0]= rs.getString(1); 
+                cart[order[i]][1]= rs.getString(2);
+            }  
         }
   
         //Loop through the tables to update each

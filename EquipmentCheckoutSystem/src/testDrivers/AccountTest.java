@@ -18,6 +18,8 @@ public class AccountTest {
         String equip_id2 = "15";
         String qty2 = "2";
         
+        Integer order[] = new Integer[] {11, 12, 13};
+        
         System.out.println("------------------------Verify checking if account table exists");
         //Verify checking if account table exists
         if (Account.checkExists(table)){
@@ -63,6 +65,6 @@ public class AccountTest {
         Account.createAcc(username);       
         Account.createAcc(username2);
         
-        
+        Account.update("zmurray22", order);
     }
 }
