@@ -93,7 +93,8 @@ public class Account {
         DBConnect db = new DBConnect();
         //Store the time of transaction     
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
-        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime dateTime = LocalDateTime.now();
+        String now = dateTime.format(dtf);
         
         //Get profile elements
         //employee: empl_id, fname, lname, access, phone, username, password
@@ -117,8 +118,10 @@ public class Account {
                 cart[order[i]][0]= rs.getString(1); 
                 cart[order[i]][1]= rs.getString(2);
             }  
+            rs.close(); // Remember to close your ResultSets
+            sqlStmt.close(); // And your SQL commands
         }
-  
+        
         //Loop through the tables to update each
         for(int i = 0; i < order.length; i ++){
             String transactionID = GetNewID(tableName);
@@ -126,7 +129,7 @@ public class Account {
             String title = cart[i][1];
             
             //Insert user account record
-            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', " + equipID + "', " + title + "', '" + now + "';");
+            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "', " + equipID + "', " + title + "', '" + now + "'");
 
             //Update Inventory available
             String subInv = "available - 1";
