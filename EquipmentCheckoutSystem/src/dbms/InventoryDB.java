@@ -36,8 +36,8 @@ public class InventoryDB {
         return rs;
     }
    
-
-     public static void update(String equip_ID, String newAvailable) {
+    //newAvailable variable = "+ or - 1"
+     public static void update(Integer equip_ID, String newAvailable) {
         DBConnect db = new DBConnect();
         db.SqlUpdate("Inventory", "available = '" + newAvailable + "'", "equip_id = '" + equip_ID + "'");
         db.Dispose();

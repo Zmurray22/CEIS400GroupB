@@ -130,9 +130,12 @@ public class Account {
   
         //Loop through the tables to update each
         for(int i = 0; i < order.length; i ++){
-            //Insert user account record
             String transactionID = GetNewID(tableName);
-            db.SqlInsert(tableName, "transaction_id, equip_id, title, qty, date", "'" + transactionID + "'" + equip_id + "', '" + title + "', '" + qty + "', '" + now + "'");
+            String equipID = cart[i][1];
+            String title = cart[i][2];
+            
+            //Insert user account record
+            db.SqlInsert(tableName, "transaction_id, equip_id, title, date", "'" + transactionID + "'" + equipID + "', " + title + "', '" + now + "'");
 
             //Update Inventory available
             for (int i = 0; i < order.length; i++){
