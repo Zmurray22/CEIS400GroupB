@@ -40,8 +40,7 @@ public class Account {
             System.out.println("Account " + tableName + " exists");
             ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
             while(rs.next()){
-                System.out.println("Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + 
-                " | Quantity: " + rs.getInt("qty") + " | Date: " + rs.getString("date"));
+                System.out.println("Transaction Id: " + rs.getString("transaction_id") + "Equipment ID: " + rs.getString("equip_id") + " | Title: " + rs.getString("title") + " | Date: " + rs.getString("date"));
             }
         }
         else{
