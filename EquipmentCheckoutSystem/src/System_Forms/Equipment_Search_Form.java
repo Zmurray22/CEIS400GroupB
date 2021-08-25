@@ -576,35 +576,29 @@ private JFrame frame;
         //ArrayList<String>ArrListItems  = new ArrayList<String>(Arrays.asList(Items));
         //Grab the List of Equipment ID ArrayList 
         //Validation that there is something in the ArrayList
-        if(User.getOrder().isEmpty())
-        {
-        JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
-"Error", JOptionPane.ERROR_MESSAGE);
+        if(User.getCart().isEmpty()){
+            JOptionPane.showMessageDialog(this, "Error. You have no items located in your cart.",
+            "Error", JOptionPane.ERROR_MESSAGE);
         }
-        else
-        {
-        //use the ArrayList to locate each Equipment associated with that ID
-        String rs = "";
-        DBConnect db = new DBConnect();
-        for(String ID : order)
-        {
+        else{
+            //use the ArrayList to locate each Equipment associated with that ID
+            String rs = "";
+            DBConnect db = new DBConnect();
+            for(String ID : order){
              rs = db.SqlSelectSingle("SELECT title FROM Inventory WHERE equip_id = " + ID);
              ArrListItems.add(rs);
              Items = ArrListItems.toArray(Items);
-        }       
-        if(JOptionPane.showConfirmDialog(frame, Items, "Confirm your Cart Selections.",
-                JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION)
-           {
-               JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
-           }
-        
-        for (String ID : Items)
-        {
-           String sql =("SELECT * FROM Inventory WHERE title = " + ID); 
-        
-            JOptionPane.showMessageDialog(this, db.SqlSelectAll(sql));
-        
-        }
+            }       
+            
+            if(JOptionPane.showConfirmDialog(frame, Items, "Confirm your Cart Selections.", JOptionPane.YES_NO_OPTION)==JOptionPane.YES_OPTION){
+                   JOptionPane.showMessageDialog(this, "Your Order has been confirmed and appended to your Account.");
+            }
+
+            for (String ID : Items){
+               String sql =("SELECT * FROM Inventory WHERE title = " + ID); 
+
+                JOptionPane.showMessageDialog(this, db.SqlSelectAll(sql));
+            }
         }
     }//GEN-LAST:event_btnOrderActionPerformed
 
