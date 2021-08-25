@@ -89,7 +89,7 @@ public class Account {
         db.Dispose();
     }
     
-    public static void update(String username, Integer [] order) throws ParseException, SQLException{
+    public static void update(String username, Integer order[]) throws ParseException, SQLException{
         //Updates Account, Inventory, Equipment_hist, and emp_equipment tables
         DBConnect db = new DBConnect();
         //Store the time of transaction     
@@ -162,6 +162,16 @@ public class Account {
         //return array of profile elements
         db.Dispose();
         return profileArr;
+    }
+    
+    public static void returnEquip(String tableName, Integer transactionID) throws SQLException{
+        DBConnect db = new DBConnect();
+        
+        Connection Conn = db.getConn();
+        Statement sqlStmt = Conn.createStatement();
+        
+        String query = "DELETE FROM " + tableName + " WHERE transaction_id=" + transactionID + "";
+        ResultSet rs = sqlStmt.executeQuery(db.Clean(query));       
     }
     
      // This method will auto increment the current equipment_hist hist_id 
