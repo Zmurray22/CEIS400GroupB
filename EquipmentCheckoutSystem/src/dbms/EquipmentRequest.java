@@ -16,16 +16,16 @@ public class EquipmentRequest {
     private String access;
     private String tableName;
 
+
+    public EquipmentRequest() {
+    }
+    
     public String getTableName() {
         return tableName;
     }
 
-    public void setTableName(String tableName) {
-        
+    public void setTableName() {
         this.tableName = fname + "_" + lname;
-    }
-
-    public EquipmentRequest() {
     }
     
     public String getUserName() {
@@ -85,6 +85,7 @@ public class EquipmentRequest {
     }
     
     public void sendOrder() throws ParseException, SQLException{
+        Account.createAcc(userName);
         String[] orderArr = cart.toArray(new String[0]);
         System.out.println(Arrays.toString(orderArr));
         Account.update(getUserName(), orderArr);
