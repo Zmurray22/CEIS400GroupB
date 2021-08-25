@@ -196,6 +196,7 @@ public class Login_Form extends javax.swing.JFrame {
         String lNameSql = db.SqlSelectSingle("SELECT lName FROM employee WHERE username = " + "'" + txtUsername.getText() + "'" + "");
         ims.main.User.setFname(fNameSql);
         ims.main.User.setLname(lNameSql);
+        ims.main.User.setUserName(txtUsername.getText());
     } 
 
     /**

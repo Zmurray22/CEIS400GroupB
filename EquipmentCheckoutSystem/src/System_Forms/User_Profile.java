@@ -92,7 +92,7 @@ public class User_Profile extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Equipment ID", "Equipment Title", "Title"
+                "Transaction ID", "Equipment ID", "Equipment Title", "Title"
             }
         ));
         jScrollPane1.setViewportView(EquipTable);

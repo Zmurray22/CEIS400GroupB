@@ -147,13 +147,10 @@ public class main {
             switch (answer){
                 case 1:
                     System.out.println("View Profile\n" + "*".repeat(12));
-                    
-                    String profileArr[] = Account.userProfile(username);
-                    
+                  
                     //Print the profile data
-                    System.out.println("Employee ID: " + profileArr[0] + "\nFirst Name: " + profileArr[1] + 
-                     "\nLast Name: " + profileArr[2] + "\nAccess Level: " + profileArr[3] + "\nPhone: " + 
-                    profileArr[4] + "\nUsername: " + profileArr[5]);
+                    System.out.println("Employee ID: " + ims.main.User.getUserID() + "\nFirst Name: " + ims.main.User.getFname() + 
+                     "\nLast Name: " + ims.main.User.getLname() + "\nAccess Level: " + ims.main.User.getAccess() + "\nUsername: " + ims.main.User.getUserName());
                     break;
                 case 2:
                     System.out.println("View Account\n" + "*".repeat(12));

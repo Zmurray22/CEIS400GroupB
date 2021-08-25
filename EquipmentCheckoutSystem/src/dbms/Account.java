@@ -34,9 +34,8 @@ public class Account {
     public static void showAccount(String username) throws SQLException{
          //Check for account table under user's name and print
         DBConnect db = new DBConnect();
-        
-        String[] profile = Account.userProfile(username);
-        String tableName = profile[1] + "_" + profile[2];
+
+        String tableName = ims.main.User.getTableName();
         if (Account.checkExists(tableName)){
             System.out.println("Account " + tableName + " exists");
             ResultSet rs = db.SqlSelectAll("SELECT * FROM " + tableName);
@@ -53,11 +52,9 @@ public class Account {
     public static void createAcc(String username) throws SQLException{
         //Create an account table for a given user if it does not already exist
         DBConnect db = new DBConnect();
-     
-         //Get profile elements
-        String profileArr[] = userProfile(username);
+
         //Set account tablename
-        String tableName = profileArr[1] + "_" + profileArr[2];
+        String tableName = ims.main.User.getTableName();
         //Search for existing user account table
         //Return if already exists
         if (checkExists(tableName)){
@@ -79,11 +76,9 @@ public class Account {
     public static void deleteAcc(String username) throws SQLException{
         //Delete user Account table
         DBConnect db = new DBConnect();
-        //Pull the first and last name of the user from username
-        //Get profile elements
-        String profileArr[] = userProfile(username);
+
         //Set account tablename
-        String tableName = profileArr[1] + "_" + profileArr[2];
+        String tableName = ims.main.User.getTableName();
         ///drop table
         
         db.Dispose();
@@ -97,11 +92,8 @@ public class Account {
         LocalDateTime dateTime = LocalDateTime.now();
         String now = dateTime.format(dtf);
         
-        //Get profile elements
-        //employee: empl_id, fname, lname, access, phone, username, password
-        String profileArr[] = userProfile(username);
         //Set account tablename
-        String tableName = profileArr[1] + "_" + profileArr[2];
+        String tableName = ims.main.User.getTableName();
         
         //Get equipment elements
         //Inventory: equip_id, title(, available, total, vendor Not Needed in Array)
@@ -139,17 +131,17 @@ public class Account {
             
             //Update equipment_hist
             String hist_id = GetNewID("equipment_hist");
-            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + profileArr[0] + "', '" + equipID + "', 'Checkout', '" + now + "'");
+            db.SqlInsert("equipment_hist", "transaction_id, empl_id, equip_id, action, hist_date", "'" + hist_id + "', '" + ims.main.User.getUserID() + "', '" + equipID + "', 'Checkout', '" + now + "'");
 
             //Update emp_equipment
-            db.SqlInsert("emp_equipment", "empl_id, equip_id, title", "'" + profileArr[0] + "', '" + equipID + "', '" + title + "'");
+            db.SqlInsert("emp_equipment", "empl_id, equip_id, title", "'" + ims.main.User.getUserID() + "', '" + equipID + "', '" + title + "'");
             //If new qty equals 0 then drop record
             ///working issue- can't insert if exists, but can't update if doesn't exist.
         }
         db.Dispose();
     }
     
-    public static String[] userProfile(String username) throws SQLException{
+    public static void userProfile(String username) throws SQLException{
         //Pull employee profile record from the database with username entered earlier
         
         DBConnect db = new DBConnect();
@@ -162,10 +154,13 @@ public class Account {
                 profileArr[i-1] = record;
             }
         }
-
+        ims.main.User.setUserID(profileArr[0]);
+        ims.main.User.setUserName(profileArr[1]);
+        ims.main.User.setUserName(profileArr[2]);
+        ims.main.User.setUserName(profileArr[3]);
+        ims.main.User.setUserName(profileArr[5]);
         //return array of profile elements
         db.Dispose();
-        return profileArr;
     }
     
     public static void returnEquip(String tableName, Integer transactionID) throws SQLException{
