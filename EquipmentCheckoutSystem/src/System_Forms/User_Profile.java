@@ -36,7 +36,7 @@ public class User_Profile extends javax.swing.JFrame {
         txtFirstName.setText(ims.main.User.getFname());
         txtLastName.setText(ims.main.User.getLname());
         DBConnect db = new DBConnect();
-        String sql = ("SELECT * FROM account_temp");
+        String sql = ("SELECT * FROM " + ims.main.User.getTableName());
         try{
         ResultSet rs = db.SqlSelectAll(sql);
         DefaultTableModel model = (DefaultTableModel)EquipTable.getModel();
