@@ -20,6 +20,13 @@ import javax.swing.JFrame;
 
 //test for Zach
 public class main { 
+    
+    public static EquipmentRequest User;
+
+    public main(EquipmentRequest User) {
+        this.User = User;
+    }
+    
     public static void main(String[] args) throws SQLException {
         //DBConnect db = new DBConnect();
         
