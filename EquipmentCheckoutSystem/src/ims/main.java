@@ -1,18 +1,9 @@
 package ims;
 
 import System_Forms.Login_Form;
-import com.sun.jdi.connect.spi.Connection;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.DatabaseMetaData;
 import dbms.DBConnect;
-import dbms.InventoryDB;
-import dbms.EmployeeDB;
-import dbms.VendorDB;
 import dbms.Account;
 import dbms.EquipmentRequest;
-import ims.EquipmentManager;
-import ims.MaintEmployee;
 import java.sql.SQLException;
 import java.util.Scanner;
 import javax.swing.JFrame;
@@ -43,30 +34,21 @@ public class main {
 
             choice = mainMenu();
             switch (choice) {
-            case 1:
-                testDatabase();
-                break;
-            case 2:
+            case 1 -> testDatabase();
+            case 2 -> {
                 System.out.println("Log In Menu\n\n");
                 logIn();
-
-                break;
-            case 3:
-                System.out.println("Check Out Equipment\n\n");
+                }
+            case 3 -> System.out.println("Check Out Equipment\n\n");
                 /*checkOut();*/
-                break;
-            case 4:
+            case 4 -> {
                 System.out.println("Check In Equipment\n\n");
                 checkIn();
-                break;
-            case 5:
-                launchGUI();
-            case 0:
-                //Close app
+                }
+            case 5 -> launchGUI();
+            case 0 -> //Close app
                 System.out.println("Thanks for using\n\n");
-                break;
-            default:
-                // The user input an unexpected choice.
+            default -> // The user input an unexpected choice.
                 System.out.println("Invalid reponse, Try again.\n\n");
             }    
         }while(choice != 0);

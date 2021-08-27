@@ -154,12 +154,12 @@ public class Account {
                 profileArr[i-1] = record;
             }
         }
+        //Set user profile data to the EquipmentRequest object for persistence
         ims.main.User.setUserID(profileArr[0]);
         ims.main.User.setUserName(profileArr[1]);
         ims.main.User.setUserName(profileArr[2]);
         ims.main.User.setUserName(profileArr[3]);
         ims.main.User.setUserName(profileArr[5]);
-        //return array of profile elements
         db.Dispose();
     }
     
@@ -176,7 +176,7 @@ public class Account {
         if (id.equals("")) // This is incase there are no registered vendors in the software
             id = "1";
         else
-            id = String.format("%o", Integer.parseInt(id) + 1); // This will increment the top ID by one     
+            id = String.valueOf(Integer.parseInt(id)+1); // This will increment the top ID by one     
         db.Dispose(); // This will close our database connection for us
         return id;
     }
